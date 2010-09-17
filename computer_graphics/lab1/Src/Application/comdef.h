@@ -1,0 +1,17 @@
+#ifndef _comdef_h
+#define _comdef_h
+
+#include "FVF_Gen.h"
+
+namespace cg_labs
+{
+   typedef unsigned long DWORD;
+
+   const DWORD VertexFormat = D3DFVF_XYZ | D3DFVF_DIFFUSE;
+
+   //TODO: Check if boost can be used for labs & use static assert
+   typedef D3D_Util::FVF_Gen<VertexFormat>::Res Vertex;
+}
+
+
+#endif /* _comdef_h */
