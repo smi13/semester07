@@ -1,0 +1,71 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{ucs}
+\usepackage[russian]{babel}
+\usepackage{cmap}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{tocloft}
+\usepackage[margin=20mm]{geometry}
+
+\begin{document}
+
+\begin{enumerate}
+  \item \begin{bf}Почему однопрограммный пакетный режим – более производительный, чем индивидуальный (однопрограммный, надо понимать)?\end{bf} \\
+
+    Хорошо иллюстрирует пример Игоря Викторовича про перфокарты. Когда система находится во владении одного пользователя, в случае её отказа или сбоя
+    ресурсы системы простаивают, пока пользователь отлаживает и думает. В пакетном же режиме в случае отказа запускается следующая задача - система
+    не простаивает. Особенно это было актуально понятно когда.
+
+  \item \begin{bf} Какой добавочный резерв производительности задействует пакетный мультипрограммный режим по сравнению с пакетным однопрограммным? \end{bf} \\
+
+    Устройства ввода-вывода --- можно считать и печатать одновременно, например. Да и вообще разделяемость ресурсов (процессор, память).
+
+  \item \begin{bf} Какой из режимов обеспечивает самую высокую производительность? Реактивность? \end{bf} \\
+
+      Реактивность - реального времени. Производительность - пакетный (или индивидуальный?). 
+
+    \item \begin{bf} В вычислительных центрах существует многопользовательский режим удаленного ввода заданий (Remote Job Entry, RJE), промежуточный между 2.1 и 2.2. Он эффективен, когда несколько программистов работают в цикле подготовка/отладка программ. Охарактеризуйте его. \end{bf} \\
+
+	Людей имеют доступ к ресурсам, которые по некоторым причинам не воспроизводимы на ПК. Похож на мультипрограммный пакетный.
+	Как охарактеризовать?..
+
+  \item \begin{bf}Как размер кванта времени в режиме разделения времени влияет на реактивность? На производительность?\end{bf}\\
+
+    Чем меньше размер кванта, тем меньше реактивность, очевидно, но также тем меньше задач можно выполнить в течение такого кванта - производительность 
+    ниже.
+
+  \item \begin{bf} В чем преимущества однопользовательского мультипрограммирования W2k по сравнению с однопрограммным режимом, единственно возможным в MS-DOS? \end{bf} \\
+
+  \item \begin{bf}В Win2k UniqueProcessId (сокр. PID) – целые, кратные 4. Зачем?\end{bf} \\
+
+    Побочный эффект повторного использования кода. Тот же код использовался для выделения дескрипторов в ядре, а вот там они делятся на четыре, потому что
+    два последних бита всегда ноль, делается для всяких разных целей. \\ 
+    \url{http://blogs.msdn.com/b/oldnewthing/archive/2008/02/28/7925962.aspx}
+
+    \pagebreak
+
+  \item \begin{bf} Значительную долю времени переключения контекста занимает перегрузка содержимого общих регистров в РСВ и обратно. Как можно этого избежать – ценой увеличения объема аппаратуры процессора (что сделано, в частности, в архитектуре RISC–процессоров Sun Sparc) ?\end{bf}\\
+
+      Большое количество регистров общего значения, разбитой на небольшие наборы (регистровые окна). Так вроде в Sun Sparc и сделано.
+
+      The SPARC processor usually contains as many as 160 general purpose registers. At any point, only 32 of them are immediately visible to software - 8 are a set of global registers (one of which, g0, is hard-wired to zero, so only 7 of them are usable as registers) and the other 24 are from the stack of registers. These 24 registers form what is called a register window, and at function call/return, this window is moved up and down the register stack. Each window has 8 local registers and shares 8 registers with each of the adjacent windows. The shared registers are used for passing function parameters and returning values, and the local registers are used for retaining local values across function calls.
+
+      The "Scalable" in SPARC comes from the fact that the SPARC specification allows 
+     \\ implementations to scale from embedded processors up through large server processors, all sharing the same core (non-privileged) instruction set. One of the architectural parameters that can scale is the number of implemented register windows; the specification allows from 3 to 32 windows to be implemented, so the implementation can choose to implement all 32 to provide maximum call stack efficiency, or to implement only 3 to \begin{it}reduce context switching time\end{it}
+
+  \item \begin{bf}Приведите пример «местоимения» при именовании файловых каталогов.\end{bf} \\
+
+    /Documents and settings/fzentsev/\begin{it}My\end{it} documents. А может и нет, не зря в кавычках дано.
+
+  \item \begin{bf} Приведите пример контекста сеанса пользователя Unix или Windows. \end{bf} \\
+
+      Предположение: /home/username в Unix, Desktop в Windows. А может и нет. Может список в ProcessExplorer или htop - это контекст сеанса?
+
+  \item \begin{bf} Как принцип умолчания позволяет кратко именовать файлы в иерархических каталогах? Приведите другие примеры принципа умолчания в пользовательских интерфейсах. \end{bf} \\
+
+    /work/company1projects/projectname/projectcore/\begin{it}src\end{it}
+
+\end{enumerate}
+
+\end{document}
