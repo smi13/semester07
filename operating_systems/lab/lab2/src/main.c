@@ -15,7 +15,7 @@
 #include <string.h>
 
 /*******************************************************************************
-									    Utils
+   Utils
 ********************************************************************************/
 
 typedef unsigned char byte;
@@ -24,11 +24,10 @@ void print_help()
 {
 	printf("Usage: ./fz [file1] [file2] ... [file_n] <file_out> | -e <file>\n"
 			 "Options: \n   -e, --extract   Extract files from <file> \n");
-			 //"If first argument is -e, second is considered name of \nfile, which was compressed using fz early\n");
 }
 
 /*******************************************************************************
-									    Extracting functions
+  Extracting functions
 ********************************************************************************/
 
 int extract_file( int file_des )
@@ -137,7 +136,7 @@ int unpack_files( char *file_name )
 }
 
 /*******************************************************************************
-									    Archiving functions
+  Archiving functions
 ********************************************************************************/
 
 int add_file( char *file_name, int file_des )

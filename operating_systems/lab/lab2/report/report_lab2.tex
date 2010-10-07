@@ -1,0 +1,24 @@
+\include{preamble}
+
+\begin{document}
+
+\input{./title.tex}
+
+\pagebreak
+
+\textbf{Формулировка задания (2.6):}  Напишите простой архиватор (программу, объединяющую несколько файлов в
+один), сохраняющий атрибуты файла (владельца, группу, права доступа, дату последнего изменения) и восстанавливающий их при распаковке архива. \\
+
+\textbf{Реализация:} На языке \textsc{C}. Для работы с файловой системой (в образовательных целях) я пользовался системными вызовами: 
+\textsc{open, write, read, close}. Упомяну, что вообще эти функции работают медленнее, чем их аналоги из стандартной библиотеки. Для реализации
+сохранения различных атрибутов файла была использована функция \textsc{fstat}, а для восстановления - функции \textsc{fchown, fchmod, utime}.
+
+\section*{Исходный код программы}
+\lstset{language=c, caption=fz archiver,%
+label=source-code, basicstyle=\footnotesize,%
+numbers=left, numberstyle=\footnotesize, numbersep=5pt, frame=single, breaklines=true, breakatwhitespace=false,%
+inputencoding=utf8x}
+\lstinputlisting{../src/main.c}
+
+\end{document}
+

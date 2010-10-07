@@ -5,6 +5,12 @@ filetype plugin on
 " can be called correctly.
 set shellslash
 
+set shiftwidth=3
+set tabstop=3 
+
+set autoindent
+set cindent
+
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to always generate a file-name.
@@ -27,6 +33,7 @@ set laststatus=2
 " map <C-k> :!cp src/* /home/fzentsev/iplinux-bootstrap-0.2.3/chroot-dir/build/liscur/src/ <CR>
 map <C-p> :w<CR>:!pdflatex %<CR> 
 map <C-s> :w<CR>
+map <F7> :make<CR>
 
 " map <C-Space> :call g:KLS.StoreCurrentInputSource()<CR> 
 " map <C-PageDown> :let g:kls_currentInputSourceIndex<CR> 
