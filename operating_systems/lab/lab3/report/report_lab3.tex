@@ -1,0 +1,24 @@
+\include{preamble}
+
+\begin{document}
+
+\input{./title.tex}
+
+\pagebreak
+
+\textbf{Формулировка задания (3.4):} Напишите программу-демон, получающую в качестве аргумента число N и через N минут после
+запуска отправляющую пользователю, от чьего имени она запущена, письмо с произвольным текстом (запустите программу mail). \\
+
+\textbf{Реализация:} На языке \textsc{C}. Для написания программы-демона требуется создать собственный процесс и удалить процесс-родителя, тогда созданный процесс подхватится процессом \textsc{init} - такие процессы и называют демонами. Также для безопасности стоит закрыть
+стандартные потоки ввода/вывода. Все равно программа-демон не взаимодействует с терминалом, а оставшиеся открытыми они могут представлять потенциальную опасность. Далее по заданию выжидается время с помощью функции \textsc{sleep}. Сообщение отправляется с помощью вызова функции \textsc{system} - вызывается программа \textsc{mail}. Имя пользователя, запустившего программу, можно узнать с помощью функций \textsc{getuid, getpwuid}.
+
+
+\section*{Исходный код программы}
+\lstset{language=c, caption=Simple daemon program example source, %
+label=source-code, basicstyle=\footnotesize,%
+numbers=left, numberstyle=\footnotesize, numbersep=5pt, frame=single, breaklines=true, breakatwhitespace=false,%
+inputencoding=utf8x}
+\lstinputlisting{../src/main.c}
+
+\end{document}
+
