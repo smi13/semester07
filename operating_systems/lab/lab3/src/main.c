@@ -72,11 +72,10 @@ int main( int argc, char *argv[] )
 		return EXIT_FAILURE;
 	}
 
-	printf("Everything is OK. Going start daemon for %i seconds.\n", N * 60);
+	printf("Everything is OK. Going to start daemon for %i seconds.\n", N * 60);
 
 	if (prepare_daemon() == -1)
 	{
-		printf("Error preparing daemon for work\n");
 		return EXIT_FAILURE;
 	}
 
