@@ -84,7 +84,7 @@ void *customer_procedure( void *arg )
 
 	printf("Mr. %i is going to get a new haircut. (%i/%i)\n", self_id, customers, chair_number);
 
-   get_haircut(self_id);
+	get_haircut(self_id);
 
 	printf("Mr. %i got a new haircut. He leaves the barbershop. (%i/%i)\n", self_id, customers, chair_number);
 
@@ -160,7 +160,7 @@ int main( int argc, char *argv[] )
 	chair_number = atoi(argv[1]);
 	haircut_duration = atoi(argv[2]);
 
-   pthread_create(&barber_thread, NULL, barber_procedure, NULL);
+	pthread_create(&barber_thread, NULL, barber_procedure, NULL);
 
 	init_semaphores();
 

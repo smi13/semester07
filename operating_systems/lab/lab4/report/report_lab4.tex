@@ -1,0 +1,28 @@
+\include{preamble}
+
+\begin{document}
+
+\input{./title.tex}
+
+\pagebreak
+
+\textbf{Формулировка задания (4.3):} Напишите программу, моделирующую решение задачи «спящего брадобрея». Задачу необходимо решить
+с помощью потоков \textsc{POSIX}. \\
+
+\textbf{Формулировка задачи:} Парикмахерская состоит из \textsc{n} стульев и стула, где брадобрей работает с посетителем. Если
+посетителей нет, то брадобрей ложится спать. Если заходит посетитель, но все стулья заняты, он уходит. Если брадобрей занят, но
+свободный стул есть, тогда посетитель занимает свободный стул. Если же брадобрей спит, то посетитель будит его и садится в кресло,
+где его будут стричь. \\ 
+
+\textbf{Реализация:} На языке \textsc{C} c использованием \textsc{pthreads}. Реализация почти полностью соответствует описанию
+решения задачи из книги \textit{The Little Book of Semaphores, Allen B. Downey}.
+
+\section*{Исходный код программы}
+\lstset{language=c, caption=Barbershop problem simulation program source, %
+label=source-code, basicstyle=\footnotesize,%
+numbers=left, numberstyle=\footnotesize, numbersep=5pt, frame=single, breaklines=true, breakatwhitespace=false,%
+inputencoding=utf8x}
+\lstinputlisting{../src/main.c}
+
+\end{document}
+

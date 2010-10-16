@@ -5,6 +5,7 @@ filetype plugin on
 " can be called correctly.
 set shellslash
 
+set expandtab
 set shiftwidth=3
 set tabstop=3 
 
@@ -41,6 +42,7 @@ map <F7> :make<CR>
 colors wombat
 
 if has("gui_running")
+ set gfn=Consolas\ Regular\ 12
  set guioptions-=T " Disable toolbar, menu bar, scroll bars
  set guioptions-=r
  set guioptions-=R
