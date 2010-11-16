@@ -120,7 +120,7 @@
 \begin{frame}
    \frametitle{Фундаментальные вопросы}
    \begin{columns}
-      \begin{column}{0.5\textwidth}
+      \begin{column}{0.6\textwidth}
       \begin{enumerate}
          \item Какое {\color{red}химическое соединение} обладает интересующим свойством? \\
             \emph{Свойство} $ \overset{QSPR\footnotemark}{\rightarrow} $ \emph{Структура}
@@ -130,7 +130,7 @@
             \emph{Реакция} $ \rightarrow $ \emph{Продукт}
       \end{enumerate}
       \end{column}
-      \begin{column}{0.5\textwidth}
+      \begin{column}{0.4\textwidth}
          \includegraphics[scale=0.65]{images/question-marks2.png}
       \end{column}
    \end{columns}
@@ -146,6 +146,13 @@
   \begin{itemize}
     \item Огромное количество информации: миллионы соединений, миллионы публикаций
     \item Сложные химико-биологические связи
+      \begin{itemize}
+        \item Потребность в математических расчетах
+        \item Потребность в визуализации
+      \end{itemize}
+    \item Низкая результативность экспериментов
+    \item Дороговизна натурных экспериментов
+    \item Вечный поиск новых лекарств
   \end{itemize}
    \end{column}
    \begin{column}{0.5\textwidth}
@@ -156,6 +163,44 @@
 
  \footnotetext{CAS: Chemical Abstracts Service, химическая реферативная служба}
 
+\end{frame}
+
+\section{История}
+
+\begin{frame}
+   \frametitle{История}
+   \framesubtitle{Первые <<хемоинформатики>>}
+   \begin{center}
+   \begin{tabular}{c c}
+     Дмитрий Иванович Менделеев & Фридрих Август Кекуле \\
+     \includegraphics[scale=0.25]{images/mendeleev.png} & \includegraphics[scale=0.31]{images/kekule.png} \\
+   \end{tabular}
+ \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{История}
+  \framesubtitle{Вехи зарождения}
+  \begin{itemize}
+    \item Базы данных
+      \begin{itemize}
+        \item 1957 год. Вашингтон, Национальное Бюро Стандартов
+        \item 1960 год. Начало финансирования Химической Реферативной Службы для составления баз данных и разработки методов поиска          
+      \end{itemize}
+    \item Визуализация
+      \begin{itemize}
+        \item Конец шестидесятых. Принстон и Сан-Франциско
+      \end{itemize}
+        \item Разработка синтеза
+          \begin{itemize}
+            \item 1969 год. Гарвард
+          \end{itemize}
+        \item Структурное разъяснение \emph{(elucidation)} и генерация химических соединений
+          \begin{itemize}
+            \item 1964 год. Стэнфорд, проект \begin{tt}DENDRAL\end{tt}
+            \item 1970 год. Университет Аризоны
+          \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \section{Представление химической информации}
@@ -206,22 +251,30 @@
 \begin{frame}
   \frametitle{Представление химической информации}
   \framesubtitle{Внешнее: химические форматы файлов(1)}
+  \begin{columns}
+\begin{column}{0.7\textwidth}
   \begin{itemize}
     \item Строковое представление, \begin{tt}SMILES\end{tt}\footnotemark 
-      \footnotetext{Simplified Molecular Input Line Entry Specification} 
       \begin{itemize}
         \item Метан $ CH_4 \overset{SMILES}{\rightarrow} C $
         \item Этанол $ C_2H_6O \overset{SMILES}{\rightarrow} CCO $
         \item Бензол $ C_6H_6 \overset{SMILES}{\rightarrow} C1=CC=CC=C1 $
       \end{itemize}
     \item Строковое представление, \begin{tt}InChi\end{tt}\footnotemark
-        \footnotetext{IUPAC International Chemical Identifier}
         \begin{itemize}
-          \item Этанол $ C_2H_6O \overset{InChi}{\rightarrow} InChi=1/C2H6O/c1-2-3/h3H,2H2,1H3 $
+          \item Этанол \\ $ C_2H_6O \overset{InChi}{\rightarrow} InChi=1/C2H6O/c1-2-3/h3H,2H2,1H3 $
         \end{itemize}
       \item Представление с помощью языка разметки, \begin{tt}CML\end{tt}\footnotemark
-          \footnotetext{Chemical Markup Language}
-  \end{itemize}
+            \end{itemize}
+\end{column}
+    \begin{column}{0.5\textwidth}
+  \includegraphics[scale=0.4]{images/benzene.pdf}
+\end{column}
+
+\end{columns}
+   \footnotetext{Simplified Molecular Input Line Entry Specification} 
+   \footnotetext{IUPAC International Chemical Identifier}
+   \footnotetext{Chemical Markup Language}
 \end{frame}
 
 \begin{frame}
@@ -237,25 +290,95 @@
   \end{center}
 \end{frame}
 
-\section{Навигация}
+\section{Программные решения}
+\begin{frame}
+  \frametitle{Программные решения}
+  \framesubtitle{Базы данных соединений}
+  Химический картридж - поисковый движок для базы данных химических соединений  \\
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+  \includegraphics[scale=0.2]{images/amphetamine.pdf} \\
+  Возникают сложные задачи теории графов
+\end{column}
+\begin{column}{0.5\textwidth}
+ \includegraphics[scale=0.38]{images/substructure_search.png}
+\end{column}
+\end{columns}
+  \end{frame}
 
 \begin{frame}
-  
+  \frametitle{Программные решения}
+  \framesubtitle{Базы данных публикаций}
+  Найденные в базе данных молекулы не очень интересны сами по себе; они интересны в контексте:
+  \begin{itemize}
+    \item В каких медицинских и химических статьях указано это соединение?
+    \item Есть ли на него патент?
+    \item Представлено ли оно в коммерческих каталогах?
+    \item Известны ли его свойства, такие как растворимость, кислотность, токсичность, внутренняя абсорбция?
+    \item Известна ли химическая реакция его синтеза?
+    \item Доступны ли исходные компоненты реакции?
+  \end{itemize}
+  \begin{center}Возникает множество задач: анализ текста, распознавание изображений, комбинирование результатов\end{center}
 \end{frame}
 
-\section{Известное программное обеспечение}
 \begin{frame}
-  \frametitle{Известное программное обеспечение}
+  \frametitle{Программные решения}
+  \framesubtitle{Редакторы молекул}
+
+  \begin{center}
+    \includegraphics[scale=0.37]{images/sketcher.png}
+  \end{center}
+  \begin{itemize}
+    \item Возникают задачи укладки графа на плоскости, создание общего стандарта отрисовки, эстетики рисунка 
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Программные решения}
+  \framesubtitle{Докинг или молекулярная стыковка}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item Метод, позволяющий предсказать наиболее выгодную для создания устойчивого комплекса ориентацию и положение
+          одной молекулы относительно другой
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+  \includegraphics[height=1.3in]{images/docking.png}
+\end{column}
+\end{columns}
 \end{frame}
 
 \section{Актуальные проблемы}
 \begin{frame}
   \frametitle{Актуальные проблемы}
+  \begin{columns}
+    \begin{column}{0.7\textwidth}
+  \begin{itemize}
+    \item \emph{in silico} contra \emph{in vivo} et \emph{in vitro}
+    \item Некачественное программное обеспечение для исследователей
+      \begin{itemize}
+        \item Пользовательские интерфейсы
+        \item Производительность
+      \end{itemize}
+    \item Разобщенность обладателей баз данных, отсутствие стандартов 
+  \end{itemize}
+   \end{column}
+   \begin{column}{0.2\textwidth}
+     \includegraphics[scale=0.5]{images/mouse.pdf}
+   \end{column}
+   \end{columns}
 \end{frame}
 
 \section{Заключение}
 \begin{frame}
   \frametitle{Заключение}
+  \begin{itemize}
+    \item Хемоинформатика - сравнительно молодая область
+    \item Роль информатики в химии и фармакологии высока уже сейчас 
+    \item Химия нуждается в информатике и математике
+  \end{itemize}
 \end{frame}
 
 \section{Использованные ресурсы}
