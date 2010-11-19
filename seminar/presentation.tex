@@ -6,16 +6,16 @@
 
 \begin{frame}
   \maketitle
-  \begin{center}
-  \includegraphics[scale=0.5]{images/title.png}
-\end{center}
 \end{frame}
 
 \setcounter{page}{1}
 
 \begin{frame}
   \frametitle{Содержание} 
+  Введение \\[0.3cm]
   \tableofcontents
+  Заключение \\[0.3cm]
+  Использованные источники
 \end{frame}
 
 \section{Введение}
@@ -96,7 +96,7 @@
     \includegraphics[scale=0.3]{images/Diagram5.pdf}
   \end{center}
 
-  Основные используемые области информатики и математики:
+  Основные используемые инструменты информатики и математики:
   \begin{columns}
     \begin{column}{0.5\textwidth}
   \begin{itemize}
@@ -272,8 +272,8 @@
 \end{column}
 
 \end{columns}
-   \footnotetext{Simplified Molecular Input Line Entry Specification} 
-   \footnotetext{IUPAC International Chemical Identifier}
+   \footnotetext[2]{Simplified Molecular Input Line Entry Specification} 
+   \footnotetext[3]{IUPAC International Chemical Identifier}
    \footnotetext{Chemical Markup Language}
 \end{frame}
 
@@ -293,8 +293,12 @@
 \section{Программные решения}
 \begin{frame}
   \frametitle{Программные решения}
-  \framesubtitle{Базы данных соединений}
-  Химический картридж - поисковый движок для базы данных химических соединений  \\
+  \framesubtitle{Базы данных: химические соединения}
+  Химический картридж
+  \begin{itemize}
+    \item Поисковый движок для базы данных химических соединений 
+    \item Программа, расширяющая функциональность СУБД и позволяющая работать с ней в терминах предметной области
+  \end{itemize}
   \begin{columns}
     \begin{column}{0.5\textwidth}
   \includegraphics[scale=0.2]{images/amphetamine.pdf} \\
@@ -308,17 +312,55 @@
 
 \begin{frame}
   \frametitle{Программные решения}
-  \framesubtitle{Базы данных публикаций}
-  Найденные в базе данных молекулы не очень интересны сами по себе; они интересны в контексте:
-  \begin{itemize}
-    \item В каких медицинских и химических статьях указано это соединение?
-    \item Есть ли на него патент?
-    \item Представлено ли оно в коммерческих каталогах?
-    \item Известны ли его свойства, такие как растворимость, кислотность, токсичность, внутренняя абсорбция?
-    \item Известна ли химическая реакция его синтеза?
-    \item Доступны ли исходные компоненты реакции?
-  \end{itemize}
-  \begin{center}Возникает множество задач: анализ текста, распознавание изображений, комбинирование результатов\end{center}
+  \framesubtitle{Поиск количественных соотношений структура-свойство (QSAR\footnotemark)}
+
+  \begin{center}Отображение химического пространства на пространство дескрипторов\end{center}
+    \begin{columns}
+      \begin{column}{0.5\textwidth}
+        \begin{itemize}
+        \item Фрагментные бинарные и целочисленные дескрипторы или структурные ключи
+        \item Физико-химические дескрипторы
+        \item Квантово-химические дескрипторы
+        \item Топологические индексы
+        \item Дескрипторы молекулярных полей
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.5\textwidth}
+        \includegraphics[scale=0.5]{images/screens.png}
+      \end{column}
+    \end{columns}
+  \footnotetext[7]{QSAR: Quantative structure-activity relationship}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Программные решения}
+   \framesubtitle{Молекулярные дескрипторы}
+   Дескрипторы применяются не только для прогнозирования свойств соединений   
+   \begin{columns}
+     \begin{column}{0.4\textwidth}
+       \begin{itemize}
+         \item Ускорение подструктурного поиска
+         \item Задача молекулярного подобия
+         \item Нахождение одинаковых соединений
+       \end{itemize}
+     \end{column}
+     \begin{column}{0.6\textwidth}
+   \begin{center}
+    \includegraphics[scale=0.4]{images/similarity.png}
+   \end{center}
+   \end{column}
+   \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Программные решения}
+  \framesubtitle{Базы данных: публикации}
+    Найденные в базе данных молекулы не очень интересны сами по себе \\
+    Интересен контекст:
+    \begin{center}
+    \includegraphics[scale=0.42]{images/chemspider.png}
+    \end{center}
+    \begin{center}Возникают задачи интеллектуального анализа данных \end{center}
 \end{frame}
 
 \begin{frame}
@@ -348,6 +390,7 @@
   \includegraphics[height=1.3in]{images/docking.png}
 \end{column}
 \end{columns}
+   \begin{center} Возникают задачи оптимизации \end{center}
 \end{frame}
 
 \section{Актуальные проблемы}
@@ -371,20 +414,29 @@
    \end{columns}
 \end{frame}
 
-\section{Заключение}
+\section*{Заключение}
 \begin{frame}
   \frametitle{Заключение}
   \begin{itemize}
     \item Хемоинформатика - сравнительно молодая область
     \item Роль информатики в химии и фармакологии высока уже сейчас 
+      \begin{itemize}
+        \item Дороговизна натурных экспериментов
+        \item Очень долгий срок разработки лекарства
+      \end{itemize}
     \item Химия нуждается в информатике и математике
+      \begin{itemize}
+    \item Создаются университетские специальности по хемо- и биоинформатике
+    \item Проводятся конференции
+  \end{itemize}
+
   \end{itemize}
 \end{frame}
 
-\section{Использованные ресурсы}
+\section*{Использованные источники}
 
 \begin{frame}
-  \frametitle{Использованные ресурсы}
+  \frametitle{Использованные источники}
   \framesubtitle{Книги}
   \begin{enumerate}
     \item J.Gasteiger, T.Angel (2003). \emph{Chemoinformatics: A Textbook}     
@@ -395,7 +447,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Использованные ресурсы}
+  \frametitle{Использованные источники}
   \framesubtitle{Журналы, презентации, интернет}
   \begin{enumerate}
     \item Дмитрий Павлов, \emph{Навигация в мире органических соединений}, Компьютерные инструменты в образовании, 2010, №3 
