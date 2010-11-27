@@ -3,7 +3,11 @@
 
 #include "Library/cglApp.h"
 
+#include "scene.h"
+
 struct IDirect3DDevice9;
+struct IDirect3DVertexBuffer9; 
+struct IDirect3DIndexBuffer9; 
 
 namespace cg_labs
 {
@@ -11,7 +15,7 @@ namespace cg_labs
    {
    public:
 
-      lab1App( int nW, int nH, void* hInst, int nCmdShow ); 
+      lab1App( int nW, int nH, void *hInst, int nCmdShow ); 
 
       bool processInput( unsigned int nMsg, int wParam, long lParam );
       
@@ -26,8 +30,9 @@ namespace cg_labs
 
    private:
 
-      IDirect3DDevice9 *_device;
+      float _zdepth;
 
+      Scene _scene;
    };
 }
 

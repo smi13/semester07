@@ -15,6 +15,8 @@
 #include "lab1_app.h"
 #include "myApp.h"
 
+#include "object.h"
+
 /**
   @brief    This function is WinMain for D3DBase project
 

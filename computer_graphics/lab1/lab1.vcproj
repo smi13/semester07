@@ -211,6 +211,14 @@
 			Name="Application"
 			>
 			<File
+				RelativePath=".\Src\Application\axes.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\axes.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Src\Application\comdef.h"
 				>
 			</File>
@@ -236,6 +244,34 @@
 			</File>
 			<File
 				RelativePath="Src\Application\myApp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\object.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\render_context.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\render_context.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\renderer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\renderer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\scene.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\scene.h"
 				>
 			</File>
 		</Filter>
