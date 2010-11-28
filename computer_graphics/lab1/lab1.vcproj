@@ -259,19 +259,19 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Src\Application\renderer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Src\Application\renderer.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Src\Application\scene.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\Src\Application\scene.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\spheric_camera.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\spheric_camera.h"
 				>
 			</File>
 		</Filter>

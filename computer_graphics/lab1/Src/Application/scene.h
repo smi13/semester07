@@ -2,7 +2,8 @@
 #define _scene_h
 
 #include <algorithm>
-#include <vector>
+#include <map>
+#include <string>
 
 #include "object.h"
 
@@ -10,12 +11,15 @@ struct IDirect3DDevice9;
 
 namespace cg_labs
 {
+   typedef std::map<std::string, Object *> ObjectToNameMap;
+
    namespace Renderer
    {
       template<typename T>
       static void renderScene( T *scene )
       {
-         std::for_each(scene->_objects.begin(), scene->_objects.end(), renderObject<Object>);
+         for (ObjectToNameMap::iterator it = scene->_objects.begin(); it != scene->_objects.end(); ++it)
+            renderObject(it->second);
       }
    }
 
@@ -27,12 +31,15 @@ namespace cg_labs
 
       Scene &operator<<( Object *new_object );
 
+      Object *getObject( std::string &name );
+
       ~Scene();
 
       friend void Renderer::renderScene( Scene *scene );
 
    private:
-      std::vector<Object *> _objects;
+      
+      ObjectToNameMap _objects;
    };
 }
 

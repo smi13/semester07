@@ -10,15 +10,25 @@ Scene::Scene()
 
 Scene &Scene::operator<<( Object *new_object )
 {
-   _objects.push_back(new_object);
+   _objects.insert(std::make_pair(new_object->getName(), new_object));
 
    return *this;
 }
 
+Object * cg_labs::Scene::getObject( std::string &name )
+{
+   ObjectToNameMap::iterator it = _objects.find(name);
+
+   if (it == _objects.end())
+      return 0;
+
+   return it->second;
+}
+
 Scene::~Scene()
 {
-   for (std::vector<Object *>::iterator it = _objects.begin(); it != _objects.end(); ++it)
+   for (ObjectToNameMap::iterator it = _objects.begin(); it != _objects.end(); ++it)
    {
-      delete *it;
+      delete it->second;
    }
 }

@@ -4,6 +4,7 @@
 #include "Library/cglApp.h"
 
 #include "scene.h"
+#include "spheric_camera.h"
 
 struct IDirect3DDevice9;
 struct IDirect3DVertexBuffer9; 
@@ -33,6 +34,7 @@ namespace cg_labs
       float _zdepth;
 
       Scene _scene;
+      SphericCamera _camera;
    };
 }
 

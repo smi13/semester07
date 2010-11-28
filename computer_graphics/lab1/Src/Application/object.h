@@ -3,6 +3,8 @@
 
 #include <d3dx9.h>
 
+#include <string>
+
 namespace cg_labs
 {  
    namespace Renderer
@@ -20,9 +22,10 @@ namespace cg_labs
    {
    public:
 
-      Object() : _vbuf(0) {}
+      Object( std::string &name ) : _vbuf(0), _name(name) {}
 
       virtual D3DPRIMITIVETYPE getPrimitiveType() = 0;
+      std::string &getName() { return _name; }
 
       virtual ~Object() { _vbuf->Release(); }
 
@@ -31,8 +34,10 @@ namespace cg_labs
    protected:
 
       int _verticesCount, _primitivesCount; 
-
+      std::string _name;
       IDirect3DVertexBuffer9 *_vbuf;
+   private:
+      Object();
    };
 }
 

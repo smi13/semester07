@@ -13,7 +13,7 @@ using namespace cg_labs;
 const float s_rMouseWheel2Zoom = 0.05f;
 
 lab1App::lab1App( int nW, int nH, void *hInst, int nCmdShow ) : 
-   cglApp(nW, nH, hInst, nCmdShow)
+   cglApp(nW, nH, hInst, nCmdShow), _camera(DEG2RAD(10), DEG2RAD(10), 5.0f)
 {
    setDevice(m_pD3D->getDevice());
    float wh_ratio = (float)GetSystemMetrics(SM_CXSCREEN) / GetSystemMetrics(SM_CYSCREEN);
@@ -33,7 +33,7 @@ lab1App::lab1App( int nW, int nH, void *hInst, int nCmdShow ) :
 
    // Constructing the scene
 
-   _scene << new Axes(0.0f, 0.0f, 0.0f, 5.0f);
+   _scene << new Axes(std::string("axes-0"), 0.0f, 0.0f, 0.0f, 5.0f);
           //<< new Cube(0.0f, 0.0f, 0.0f, 5.0f);
    
    _zdepth = -5.0f;
@@ -45,11 +45,25 @@ bool lab1App::processInput( unsigned int nMsg, int wParam, long lParam )
    {
       case WM_MOUSEWHEEL:
       {
-         int zDelta = (int)((signed short)(HIWORD(wParam)));
-         _zdepth += zDelta * s_rMouseWheel2Zoom;
-         break;
+         if (LOWORD(wParam) == MK_LBUTTON)
+         {
+            int zDelta = (int)((signed short)(HIWORD(wParam)));
+            _camera.increaseR(zDelta * s_rMouseWheel2Zoom);
+
+            break;
+         }
+      }
+      case WM_MOUSEMOVE:
+      {
+         if (LOWORD(wParam) == MK_LBUTTON)
+         {
+            _camera.increasePhi(0.1);
+
+         }
       }
    }
+
+   _camera.buildMatrix();
 
    return cglApp::processInput(nMsg, wParam, lParam);
 }
@@ -57,21 +71,10 @@ bool lab1App::processInput( unsigned int nMsg, int wParam, long lParam )
 void lab1App::renderInternal()
 {
    D3DXMATRIX matWorld;
-
-   UINT iTime = timeGetTime() % 1000;
-   FLOAT fAngle = iTime * (2.0f * D3DX_PI) / 1000.0f;
-   D3DXMatrixRotationY( &matWorld, 1.0 );
-
    D3DXMatrixIdentity(&matWorld);
-   getDevice()->SetTransform(D3DTS_WORLD, &matWorld);
 
-   D3DXVECTOR3 vEyePt( 1.0f, 1.0f, -5.0f );
-   D3DXVECTOR3 vLookatPt( 0.0f, 0.0f, 0.0f );
-   D3DXVECTOR3 vUpVec( 0.0f, 1.0f, 0.0f );
-   D3DXMATRIXA16 matView;
-   D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
-   
-   getDevice()->SetTransform(D3DTS_VIEW, &matView);
+   getDevice()->SetTransform(D3DTS_WORLD, &matWorld);
+   getDevice()->SetTransform(D3DTS_VIEW, _camera.getMatrix());
 
    Renderer::renderScene(&_scene);
 }

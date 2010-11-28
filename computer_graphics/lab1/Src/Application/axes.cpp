@@ -1,4 +1,5 @@
 #include <d3dx9.h>
+#include <string>
 
 #include "comdef.h"
 #include "axes.h"
@@ -6,7 +7,7 @@
 
 using namespace cg_labs;
 
-Axes::Axes( float x, float y, float z, float a, DWORD color ) 
+Axes::Axes( std::string &name, float x, float y, float z, float a, DWORD color ) : Object(name) 
 {
    _verticesCount = 6;
    _primitivesCount = 3;
