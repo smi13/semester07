@@ -13,8 +13,6 @@
 #include <Windows.h>
 
 #include "lab1_app.h"
-#include "myApp.h"
-
 #include "object.h"
 
 /**
