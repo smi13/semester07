@@ -8,6 +8,17 @@ namespace cg_labs
    IDirect3DDevice9 *getDevice();
 
    void setDevice( IDirect3DDevice9 *dev );
+
+   void updateWindowSize( int width, int height );
+
+   int getWindowWidth();
+   int getWindowHeight();
+   
+   HWND getWindowHandle();
+   void setWindowHandle( HWND hWnd );
+
+   int getFillMode();
+   void setFillMode( int new_fill_mode );
 }
 
 

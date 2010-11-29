@@ -15,7 +15,7 @@ Scene &Scene::operator<<( Object *new_object )
    return *this;
 }
 
-Object * cg_labs::Scene::getObject( std::string &name )
+Object * Scene::getObject( std::string &name )
 {
    ObjectToNameMap::iterator it = _objects.find(name);
 
@@ -23,6 +23,11 @@ Object * cg_labs::Scene::getObject( std::string &name )
       return 0;
 
    return it->second;
+}
+
+Object * Scene::getObject( const char *name )
+{
+   return getObject(std::string(name));
 }
 
 Scene::~Scene()

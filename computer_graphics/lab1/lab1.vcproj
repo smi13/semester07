@@ -227,6 +227,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Src\Application\grid.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\grid.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Src\Application\lab1_app.cpp"
 				>
 			</File>
@@ -244,6 +252,10 @@
 			</File>
 			<File
 				RelativePath="Src\Application\myApp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\object.cpp"
 				>
 			</File>
 			<File
@@ -272,6 +284,18 @@
 			</File>
 			<File
 				RelativePath=".\Src\Application\spheric_camera.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\utils.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\utils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Application\wnd_proc.cpp"
 				>
 			</File>
 		</Filter>

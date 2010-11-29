@@ -31,8 +31,14 @@ namespace cg_labs
 
    private:
 
-      float _zdepth;
+      enum
+      {
+         MAX_KEYS = 128
+      };
 
+      bool  _keysPressed[MAX_KEYS];
+
+      Object *_enabledObject;
       Scene _scene;
       SphericCamera _camera;
    };

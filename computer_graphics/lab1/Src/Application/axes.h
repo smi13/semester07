@@ -1,8 +1,6 @@
 #ifndef _cube_h
 #define _cube_h
 
-#include <string>
-
 #include "object.h"
 
 namespace cg_labs 
@@ -11,7 +9,7 @@ namespace cg_labs
    {
    public:
       
-      Axes( std::string &name, float x, float y, float z, float a, DWORD Color = D3DCOLOR_XRGB(255, 0, 0) );
+      Axes( const char *name, float a, DWORD Color = D3DCOLOR_XRGB(255, 0, 0), bool to_render = true );
 
       virtual D3DPRIMITIVETYPE getPrimitiveType();
 

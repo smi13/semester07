@@ -32,6 +32,7 @@ namespace cg_labs
       Scene &operator<<( Object *new_object );
 
       Object *getObject( std::string &name );
+      Object *getObject( const char *name );
 
       ~Scene();
 
