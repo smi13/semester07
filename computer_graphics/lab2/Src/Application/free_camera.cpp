@@ -14,7 +14,17 @@ FreeCamera::FreeCamera()
 void FreeCamera::rotate( float dx, float dy )
 {   
    _yaw += dx;
-   _pitch += dy;  
+
+   if (dy < 0)
+   {
+      if (_pitch > -(float)M_PI_2 + 0.1)
+         _pitch += dy;  
+   }
+   else if (dy > 0)
+   {
+      if (_pitch < (float)M_PI_2 - 0.1)
+         _pitch += dy;  
+   }
 
    updateMatrix();
 }
