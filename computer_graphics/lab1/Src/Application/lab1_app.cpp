@@ -16,7 +16,7 @@
 using namespace cg_labs;
 
 lab1App::lab1App( int nW, int nH, void *hInst, int nCmdShow ) : 
-   cglApp(nW, nH, hInst, nCmdShow), _camera(DEG2RAD(35.0f), DEG2RAD(37.5f), 11.0f)
+   cglApp(nW, nH, hInst, nCmdShow), _camera(D3DXToRadian(35.0f), D3DXToRadian(37.5f), 11.0f)
 {
    for (int i = 0; i < MAX_KEYS; i++)
       _keysPressed[i] = false;
@@ -24,13 +24,9 @@ lab1App::lab1App( int nW, int nH, void *hInst, int nCmdShow ) :
    updateWindowSize(nW, nH);
    setDevice(m_pD3D->getDevice());
    setWindowHandle((HWND)m_hWnd);
-   float wh_ratio = (float)nW / nH;
-
-   D3DXMATRIX matProj;
-   D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 4, wh_ratio, 1.0f, 100.0f);
-
+   setFieldOfView(D3DX_PI / 4);
+   
    // Some rendering settings. Specific for Lab1, though.
-   getDevice()->SetTransform(D3DTS_PROJECTION, &matProj);
    getDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);   
    getDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
@@ -53,9 +49,13 @@ lab1App::lab1App( int nW, int nH, void *hInst, int nCmdShow ) :
 
 void lab1App::renderInternal()
 { 
-   Renderer::renderScene(&_scene);
+   D3DXMATRIX matProj;
+   D3DXMatrixPerspectiveFovLH(&matProj, getFieldOfView(), getWHRatio(), 0.1f, 1000.0f);
 
+   getDevice()->SetTransform(D3DTS_PROJECTION, &matProj);
    getDevice()->SetTransform(D3DTS_VIEW, _camera.getMatrix());
+
+   Renderer::renderScene(&_scene);
 }
 
 void lab1App::update()
@@ -63,13 +63,13 @@ void lab1App::update()
    _enabledObject->translate(-2.0f, -2.0f, -2.0f);
 
    if (_keysPressed[VK_RIGHT])
-      _enabledObject->rotateX(DEG2RAD(2));
+      _enabledObject->rotateX(D3DXToRadian(2));
    if (_keysPressed[VK_LEFT])
-      _enabledObject->rotateX(-DEG2RAD(2));
+      _enabledObject->rotateX(-D3DXToRadian(2));
    if (_keysPressed[VK_UP])
-      _enabledObject->rotateZ(DEG2RAD(2));
+      _enabledObject->rotateZ(D3DXToRadian(2));
    if (_keysPressed[VK_DOWN])
-      _enabledObject->rotateZ(-DEG2RAD(2));
+      _enabledObject->rotateZ(-D3DXToRadian(2));
 
    if (_keysPressed['1'])
    {

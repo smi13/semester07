@@ -19,8 +19,8 @@ namespace cg_labs
       void decreasePhi( float step );
       void increaseTheta( float step );
       void decreaseTheta( float step );
-      void increaseR( float step );
-      void decreaseR( float step );
+
+      void zoom( int step );
 
       void buildMatrix();
 

@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="lab1"
+	Name="lab"
 	ProjectGUID="{31BAF437-A5A0-4904-BAF3-8F1968A27EAC}"
 	RootNamespace="lab1"
 	TargetFrameworkVersion="131072"

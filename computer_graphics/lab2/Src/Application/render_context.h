@@ -27,6 +27,8 @@ namespace cg_labs
 
    bool isMouseLButton();
    void setMouseLButton( bool value );
+
+   int getLightCounter();
 }
 
 

@@ -59,16 +59,18 @@ void SphericCamera::decreaseTheta( float step )
       _theta -= step;
 }
 
-void SphericCamera::increaseR( float step )
+void SphericCamera::zoom( int step )
 {
-   if (_r < 15.0f)
-      _r += step;
-}
+   float dR = step * 1.5f / 120.0f;
 
-void SphericCamera::decreaseR( float step )
-{
-   if (_r > 1.5f)
-      _r -= step;
+   if (_r + dR < 6.5)
+      _r = 6.5f;
+   else if (_r + dR > 20)
+      _r = 20.0f;
+   else 
+      _r += dR;
+
+   buildMatrix();
 }
 
 SphericCamera::~SphericCamera()

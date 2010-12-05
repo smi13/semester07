@@ -11,6 +11,7 @@ static int height, width;
 static int fill_mode = D3DFILL_SOLID;
 static float fov, wh_ratio;
 static bool lbutton_pressed = false;
+static int light_counter = 0;
 
 IDirect3DDevice9 * cg_labs::getDevice()
 {
@@ -82,4 +83,9 @@ bool cg_labs::isMouseLButton()
 void cg_labs::setMouseLButton( bool value )
 {
    lbutton_pressed = value;
+}
+
+int cg_labs::getLightCounter()
+{
+   return light_counter++;
 }
