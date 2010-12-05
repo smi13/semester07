@@ -20,7 +20,7 @@ MeshObject::MeshObject( const char *name, const char *path, const char *file_nam
 
    std::string full_name = std::string(path) + std::string("\\") + std::string(file_name);
 
-   HRESULT hr = D3DXLoadMeshFromX(full_name.c_str(), 0, getDevice(),
+   HRESULT hr = D3DXLoadMeshFromX(full_name.c_str(), D3DXMESH_SYSTEMMEM, getDevice(),
       NULL, &pMat, NULL, &_numMaterials, &_mesh);
 
    if (SUCCEEDED(hr))

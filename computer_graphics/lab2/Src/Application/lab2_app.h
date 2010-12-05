@@ -22,8 +22,6 @@ namespace cg_labs
 
       bool processInput( unsigned int nMsg, int wParam, long lParam );
 
-      VOID SetupLights();
-      
       ~lab2App();
 
       friend class InputProcessor<lab2App>;
