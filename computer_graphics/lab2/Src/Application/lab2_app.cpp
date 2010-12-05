@@ -37,7 +37,7 @@ lab2App::lab2App( int nW, int nH, void *hInst, int nCmdShow ) :
 
    m_nClearColor = D3DCOLOR_XRGB(120, 120, 120);
 
-   utils::toggleFullScreen();
+   //utils::toggleFullScreen();
 
    //Constructing the scene: objects
    _scene

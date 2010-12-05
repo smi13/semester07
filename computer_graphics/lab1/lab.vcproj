@@ -4,7 +4,7 @@
 	Version="9,00"
 	Name="lab"
 	ProjectGUID="{31BAF437-A5A0-4904-BAF3-8F1968A27EAC}"
-	RootNamespace="lab1"
+	RootNamespace="lab"
 	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
