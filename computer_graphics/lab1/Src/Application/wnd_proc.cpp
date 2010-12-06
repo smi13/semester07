@@ -20,12 +20,8 @@ bool lab1App::processInput( unsigned int nMsg, int wParam, long lParam )
       {
          if (isMouseLButton())
          {
-            int zDelta = (int)((signed short)(HIWORD(wParam)));
-
-            //TODO: How to do it properly?..
+            int zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
             _camera.zoom(-zDelta);
-            //_camera.buildMatrix();
-            //setFieldOfView((std::max)(0.5f, (std::min)(getFieldOfView() + (-zDelta) * 0.001f, D3DXToRadian(120.0f))));
          }
          break;
       }

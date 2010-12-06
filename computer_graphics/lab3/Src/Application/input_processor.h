@@ -60,7 +60,7 @@ namespace cg_labs
 
       void _onMouseWheel( T *app, int wParam, long lParam )
       {
-         int zDelta = (int)((signed short)(HIWORD(wParam)));
+         int zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
 
          if (isMouseLButton())
             app->_camera->move(0, -zDelta);
