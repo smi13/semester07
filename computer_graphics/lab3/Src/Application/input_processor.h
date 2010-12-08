@@ -116,10 +116,10 @@ namespace cg_labs
          if (app->_keysPressed['3'])
             app->_scene.getLight("dirlight")->toggle();
 
-         if (wParam == VK_ADD)
+         if (wParam == VK_ADD || wParam == VK_OEM_PLUS)
             setMipmapBias(getMipmapBias() + 0.2f);
 
-         if (wParam == VK_SUBTRACT)
+         if (wParam == VK_SUBTRACT || wParam == VK_OEM_MINUS)
             setMipmapBias(getMipmapBias() - 0.2f);
 
          if (wParam == 'M')
