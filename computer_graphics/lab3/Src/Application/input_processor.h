@@ -44,15 +44,15 @@ namespace cg_labs
       {
          int x = LOWORD(lParam), y = HIWORD(lParam);
 
-         if (isMouseLButton())
-         {
+         //if (isMouseLButton())
+         //{
             if (_mouseX != -1 && _mouseY != -1)
             {
                float dx = (x - _mouseX) * constants::sensitivity,
                   dy = -(y - _mouseY) * constants::sensitivity;
                app->_camera->rotate(dx, dy);
             }
-         }
+         //}
 
          _mouseX = x;
          _mouseY = y;
@@ -62,22 +62,22 @@ namespace cg_labs
       {
          int zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
 
-         if (isMouseLButton())
+         //if (isMouseLButton())
             app->_camera->move(0, -zDelta);
 
       }
 
       void _onLButtonDown( T *app, int wParam, long lParam )
       {
-         _mouseX = LOWORD(lParam);
-         _mouseY = HIWORD(lParam);
-         ShowCursor(false);
+         //_mouseX = LOWORD(lParam);
+         //_mouseY = HIWORD(lParam);
+         //ShowCursor(false);
          setMouseLButton(true);
       }
 
       void _onLButtonUp( T *app, int wParam, long lParam )
       {
-         ShowCursor(true);
+         //ShowCursor(true);
          setMouseLButton(false);
       }
 
