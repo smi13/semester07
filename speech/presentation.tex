@@ -1,0 +1,279 @@
+\include{preamble}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{frame}
+  \maketitle
+ \end{frame}
+
+\setcounter{page}{1}
+
+\section{Введение}
+\subsection{Постановка задачи}
+
+\begin{frame}
+  \frametitle{Введение}
+  \begin{defn}
+     Восстановить машинное представление молекулы, утерянное при отрисовке
+  \end{defn}
+  \begin{center}
+  \includegraphics[scale=0.8]{media/parac.pdf}
+  \end{center}
+\end{frame}
+
+\subsection{Возникновение задачи}
+
+\begin{frame}
+  \frametitle{Введение}
+  \framesubtitle{Возникновение задачи: работа с публикациями}
+  \begin{center}
+    \href{run:media/demo.wmv}{\includegraphics[scale=0.25]{media/demo.png}}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Введение}
+  \framesubtitle{Возникновение задачи: пополнение баз знаний}
+  Соединение не так интересно само по себе. Интересен контекст.
+  \begin{center}
+     \includegraphics[scale=0.4]{media/chemspider.png}
+  \end{center}
+\end{frame}
+
+\section{Распознавание}
+
+\begin{frame}
+  \frametitle{Распознавание}
+  Этапы:
+  \begin{enumerate}
+    \item Обработка изображения
+    \item Разбор изображения
+    \item Извлечение связных компонент
+    \item Отделение символьных компонент от графических
+    \item Извлечение графа
+      \begin{itemize}
+        \item Кусочно-линейные элементы 
+        \item Стереосвязи
+        \item Кольца
+      \end{itemize}
+    \item Распознавание символов
+    \item Сборка молекулы
+    \item Исправление химических ошибок
+  \end{enumerate}
+\end{frame}
+
+\section{Этапы распознавания}
+\subsection{Обработка изображения}
+
+\begin{frame}
+  \frametitle{Этапы распознавания}
+  \framesubtitle{Обработка изображения}
+  \begin{columns}
+      \begin{column}{0.5\textwidth}
+         Призвана облегчить последующие этапы 
+        \begin{itemize}
+         \item Фильтрация
+         \item Бинаризация: перевод полутонового изображения в двуцветное
+         \end{itemize}
+      \end{column}
+      \begin{column}{0.5\textwidth}
+      \includegraphics[scale=2.5]{media/bad.png}
+      \end{column}
+   \end{columns}
+\end{frame}
+
+\subsection{Разбор изображения}
+
+\begin{frame}
+   \frametitle{Этапы распознавания}
+   \framesubtitle{Разбор изображения}
+   \begin{columns}
+     \begin{column}{0.4\textwidth}
+      Изображение может быть сложным
+      \begin{itemize}
+        \item Таблицы заместителей
+        \item Стрелки реакций
+        \item Несколько молекул
+      \end{itemize}
+ \end{column}
+ \begin{column}{0.6\textwidth}
+   \includegraphics[scale=0.4]{media/superseg.png}
+ \end{column}
+ \end{columns}
+\end{frame}
+
+\subsection{Сегментация}
+
+\begin{frame}
+  \frametitle{Этапы распознавания}
+  \framesubtitle{Сегментация. Разделение на компоненты связности}
+  \begin{center}
+  \includegraphics[scale=0.7]{media/mol_begin.pdf}
+\end{center}
+
+\end{frame}
+
+\subsection{Символьная и графическая информация}
+
+\begin{frame}
+  \frametitle{Этапы распознавания}
+  \framesubtitle{Символьная и графическая информация}
+  Разделение происходит на основе оценки высоты заглавного символа и различных эвристик
+  \begin{center}
+  \includegraphics[scale=0.7]{media/mol2.pdf}
+  \end{center}
+\end{frame}
+
+\subsection{Извлечение графа}
+
+\begin{frame}
+  \frametitle{Этапы распознавания}
+  \framesubtitle{Извлечение графа: кусочно-линейные элементы}
+  Картинка подвергается обработке фильтром утоньшения, а затем векторизации
+  \begin{center}
+  \includegraphics[scale=0.7]{media/ggg1.png}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Этапы распознавания}
+  \framesubtitle{Извлечение графа: кольца и стереосвязи}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item Распознавание стерео-вверх связей происходит после векторизации с помощью анализа толщины связи 
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item Кольца распознаются с помощью анализа дескрипторов контура сегмента
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \begin{center}
+  \includegraphics[scale=0.7]{media/mol3.pdf}
+  \end{center}
+\end{frame}
+
+\subsection{Распознавание символов}
+
+\begin{frame}
+  \frametitle{Этапы распознавания}
+  \framesubtitle{Распознавание символов}
+
+  \begin{enumerate}
+    \item Получение контура обходом в глубину в специальном графе
+      \includegraphics[scale=0.3]{media/five.pdf}
+    \item Подсчет Фурье дескрипторов контура
+      \[
+  a_n = -\frac{1}{n\pi}\sum_{k=1}^{m}\bigtriangleup\phi_k\sin(\frac{2\pi n l_k}{L}),~
+  b_n = \frac{1}{n\pi}\sum_{k=1}^{m}\bigtriangleup\phi_k\cos(\frac{2\pi n l_k}{L})
+\]
+\item Сравнение норм векторов дескрипторов 
+  \end{enumerate}
+\end{frame}
+
+\subsection{Сборка молекулы и дополнение химической информацией}
+
+\begin{frame}
+  \frametitle{Этапы распознавания}
+  \framesubtitle{Сборка молекулы и дополнение химической информацией}
+  Сборка:
+  \begin{itemize}
+    \item Поиск и объединение кратных связей
+    \item Объединение близких вершин
+    \item Закрепление меток атомов
+  \end{itemize}
+  Дополнения:
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+  \begin{itemize}
+    \item Ароматизация связей вокруг кольца
+    \item Исправление неправильных направлений стереосвязей
+  \end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+    \includegraphics[scale=0.3]{media/aromatic.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+\subsection{Результаты}
+
+\begin{frame}
+  \frametitle{Результаты}
+\end{frame}
+
+\section{Алгоритмы}
+
+\begin{frame}
+  \frametitle{Алгоритмы}
+
+  Известные
+
+  \begin{enumerate}
+    \item Фильтрация
+    \item Утоньшение 
+    \item Распознавание символов
+  \end{enumerate}
+      
+  Оригинальные
+
+  \begin{enumerate}
+    \item Разделение символьной и графической информации
+    \item Извлечение кусочно-линейных элементов
+  \end{enumerate}
+\end{frame}
+
+\section{Планы на будущее}
+
+\begin{frame}
+  \frametitle{Планы на будущее}
+  \begin{itemize}
+    \item Более сложная обработка изображения
+    \item Учет дополнительной информации на картинке (таблицы заместителей, реакции)
+    \item Раскрытие групп
+    \item Интеллектуальный разбор изображения
+    \item Контекстный анализ на основе известных из химии фактов
+    \item Комплексный анализ документа
+    \item Адаптция к работе с рукописными молекулам
+    \item Улучшение качества распознавания
+  \end{itemize}
+\end{frame}
+
+\section{Заключение}
+
+\begin{frame}
+  \frametitle{Заключение}
+  \begin{columns}
+    \begin{column}{0.7\textwidth}
+  \begin{itemize}
+    \item Задача актуальна и требует решения
+    \item Существует большое количество сложных подзадач
+      \begin{itemize}
+        \item Слипшиеся связи и символы
+        \item Связи, изображаемые кривыми
+        \item Обобщенные молекулы
+      \end{itemize}
+    \item Абсолютное качество не достижимо
+  \end{itemize}
+\centering  \includegraphics[scale=0.2]{media/complex3.png} 
+  \includegraphics[scale=0.5]{media/complex.png}
+\end{column}
+\begin{column}{0.5\textwidth}
+  \includegraphics[scale=0.5]{media/Markush.png} \\
+  \includegraphics[scale=0.3]{media/complex2.png} \\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+   \begin{center}
+     \LARGEСпасибо за внимание! \\ 
+     \url{http://ggasoftware.com} ? \url{http://scitouch.net}
+   \end{center}
+\end{frame}
+
+\end{document}
