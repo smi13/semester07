@@ -20,6 +20,7 @@ using namespace cg_labs;
 lab3App::lab3App( int nW, int nH, void *hInst, int nCmdShow ) : 
    cglApp(nW, nH, hInst, nCmdShow)
 {
+   ShowCursor(false);
    _sphericCamera.set(D3DXToRadian(90.0f), D3DXToRadian(45.0f), 60.0f);
    _camera = &_sphericCamera;   
 
