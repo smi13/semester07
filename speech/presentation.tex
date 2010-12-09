@@ -29,7 +29,7 @@
   \frametitle{Введение}
   \framesubtitle{Возникновение задачи: работа с публикациями}
   \begin{center}
-    \href{run:media/demo.wmv}{\includegraphics[scale=0.25]{media/demo.png}}
+    \href{run:media/demo.wmv}{\includegraphics[scale=0.34]{media/demo.png}}
   \end{center}
 \end{frame}
 
@@ -59,7 +59,7 @@
         \item Кольца
       \end{itemize}
     \item Распознавание символов
-    \item Сборка молекулы
+    \item Объединение результатов
     \item Исправление химических ошибок
   \end{enumerate}
 \end{frame}
@@ -163,24 +163,30 @@
   \frametitle{Этапы распознавания}
   \framesubtitle{Распознавание символов}
 
-  \begin{enumerate}
+  \begin{columns}
+    \begin{column}{0.62\textwidth}
+   \begin{enumerate}
     \item Получение контура обходом в глубину в специальном графе
-      \includegraphics[scale=0.3]{media/five.pdf}
-    \item Подсчет Фурье дескрипторов контура
+    \item Подсчет для контура дескрипторов Фурье
       \[
-  a_n = -\frac{1}{n\pi}\sum_{k=1}^{m}\bigtriangleup\phi_k\sin(\frac{2\pi n l_k}{L}),~
-  b_n = \frac{1}{n\pi}\sum_{k=1}^{m}\bigtriangleup\phi_k\cos(\frac{2\pi n l_k}{L})
+  a_n = -\frac{1}{n\pi}\sum_{k=1}^{m}\bigtriangleup\phi_k\sin(\frac{2\pi n l_k}{L}) \] \\~
+\[  b_n = \frac{1}{n\pi}\sum_{k=1}^{m}\bigtriangleup\phi_k\cos(\frac{2\pi n l_k}{L})
 \]
-\item Сравнение норм векторов дескрипторов 
-  \end{enumerate}
+    \item Сравнение дескрипторов c эталонными
+   \end{enumerate}
+   \end{column}
+   \begin{column}{0.4\textwidth}
+\centering     \includegraphics[scale=0.4]{media/five.pdf}
+   \end{column}
+ \end{columns}
 \end{frame}
 
 \subsection{Сборка молекулы и дополнение химической информацией}
 
 \begin{frame}
   \frametitle{Этапы распознавания}
-  \framesubtitle{Сборка молекулы и дополнение химической информацией}
-  Сборка:
+  \framesubtitle{Объединение результатов и дополнение химической информацией}
+  Построение молекулярного графа:
   \begin{itemize}
     \item Поиск и объединение кратных связей
     \item Объединение близких вершин
@@ -204,6 +210,19 @@
 
 \begin{frame}
   \frametitle{Результаты}
+  Уже существуют несколько наборов изображений и соответствующих файлов с машинным представлением для испытаний
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{center}\emph{USPTO \footnotemark} \\ \includegraphics[scale=0.45]{media/pie_chart2.pdf} \\ 5700 изображений \\
+      $\sim$10минут \\ $\sim$1.4 секунды на изображение \end{center}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{center}\emph{Chem-Infty} \\ \includegraphics[scale=0.4]{media/pie_chart1.pdf} \\ 
+        450 изображений \\ $\sim$10 минут \\ $\sim$1.3 секунды на изображение  \end{center}
+    \end{column}
+  \end{columns}
+  \footnotetext{United States Patent and Trademark Office}
 \end{frame}
 
 \section{Алгоритмы}
@@ -214,9 +233,13 @@
   Известные
 
   \begin{enumerate}
-    \item Фильтрация
-    \item Утоньшение 
-    \item Распознавание символов
+    \item Фильтрация. Свертка изображения с различными ядрами.
+    \item Утоньшение \\ 
+      Joseph M. Cychosz, \emph{Efficient Binary Image Thinning using Neighborhood Maps}, Graphics Gems IV, Academic Press, 1994
+    \item Распознавание символов \\
+      Charles T. Zahn \& Ralph Z. Roskies,
+  \emph{Fourier Descriptors for Plane Closed Curves},
+   IEEE Transactions on computers, Vol. c-21, No. 3, march 1972
   \end{enumerate}
       
   Оригинальные
@@ -257,7 +280,6 @@
         \item Связи, изображаемые кривыми
         \item Обобщенные молекулы
       \end{itemize}
-    \item Абсолютное качество не достижимо
   \end{itemize}
 \centering  \includegraphics[scale=0.2]{media/complex3.png} 
   \includegraphics[scale=0.5]{media/complex.png}
@@ -272,7 +294,7 @@
 \begin{frame}
    \begin{center}
      \LARGEСпасибо за внимание! \\ 
-     \url{http://ggasoftware.com} ? \url{http://scitouch.net}
+     \url{http://scitouch.net/imago}
    \end{center}
 \end{frame}
 
