@@ -25,11 +25,12 @@ namespace cg_labs
 
       ~Light();
 
+      bool _enabled;
+
    protected:
       int _id;
       D3DLIGHTTYPE _type;
       D3DXCOLOR _col;
-      bool _enabled;
       std::string _name;
       Grid *_obj;
 

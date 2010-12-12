@@ -41,10 +41,17 @@ void complex_objects::Flower::construct( int petals_num )
    for (int i = 0; i != petals_num; i++)
    {
       char Buf[50];
+      MeshObject *petal1_obj,
+         *petal2_obj;
+
       sprintf_s(Buf, "1 %i", i);
-      petals1[i] = new Node(new Petal(Buf, constants::petal_mat1), _petalUpdate);
+      petal1_obj = new Petal(Buf, constants::petal_mat1);
+      
       sprintf_s(Buf, "2 %i", i);
-      petals2[i] = new Node(new Petal(Buf, constants::petal_mat2), _petalUpdate);
+      petal2_obj = new Petal(Buf, constants::petal_mat2);      
+
+      petals1[i] = new Node(petal1_obj, _petalUpdate);
+      petals2[i] = new Node(petal2_obj, _petalUpdate);
 
       petals1[i]->addChild(petals2[i]);
       receptacle->addChild(petals1[i]);

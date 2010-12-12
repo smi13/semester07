@@ -129,9 +129,9 @@ void MeshObject::render()
       getDevice()->GetTexture(0, &tmp_tex);
 
       if (_isLightenUp)
-         getDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
+         ;//getDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
       else
-         getDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
+         ;//getDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
 
       Object::render();
 

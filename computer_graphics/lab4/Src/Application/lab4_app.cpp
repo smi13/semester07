@@ -60,6 +60,8 @@ lab4App::lab4App( int nW, int nH, void *hInst, int nCmdShow ) :
 
    _scene.getObject("ground")->setWorldDependent(true);
 
+   _scene.getLight("pointlight")->_enabled = true;
+
    tr1.init();
    tr2.init();
 }
