@@ -134,11 +134,13 @@ D3DXMATRIX complex_objects::Flower::_stemUpdate( float time, std::string &name )
 
 D3DXMATRIX complex_objects::Flower::_receptacleUpdate( float time, std::string &name )
 {
+   static float rot_angle = 0.0f;
    D3DXMATRIX res, tmp;
 
    D3DXMatrixIdentity(&res);
 
-   D3DXMatrixRotationZ(&tmp, time / 10.0f);
+   D3DXMatrixRotationZ(&tmp, rot_angle);
+   rot_angle += 0.01f;
    res *= tmp;
    D3DXMatrixTranslation(&tmp, 0, 0, -stem_length * 0.5f);
    res *= tmp;
@@ -150,7 +152,8 @@ D3DXMATRIX complex_objects::Flower::_petalUpdate( float time, std::string &name 
 {
    int ind, i;
 
-   static float old_time;
+   static float old_time, rot_angle = 0.0f;
+
    D3DXMATRIX res;
    D3DXMatrixIdentity(&res);
 
@@ -171,7 +174,8 @@ D3DXMATRIX complex_objects::Flower::_petalUpdate( float time, std::string &name 
       res *= tmp;
 
       D3DXVECTOR3 vec(r * cosf(2 * i * angle), -r * sinf(2 * i * angle), 0.0f);
-      D3DXMatrixRotationAxis(&tmp, &vec, cosf(time - 0.4f * i) - 0.8f);
+      D3DXMatrixRotationAxis(&tmp, &vec, cosf(rot_angle - 0.4f * i) - 0.8f);
+      rot_angle += 0.001f;
       res *= tmp;
 
       D3DXMatrixTranslation(&tmp, 0.0f, 0.0f, 
@@ -185,7 +189,9 @@ D3DXMATRIX complex_objects::Flower::_petalUpdate( float time, std::string &name 
    }
    else if (ind == 2)
    {
-      float angle = 0.5f * cosf(time - 0.4f * i) + D3DXToRadian(30);
+      float angle = 0.5f * cosf(rot_angle - 0.4f * i) + D3DXToRadian(30);
+
+      rot_angle += 0.001f;
       D3DXMATRIX tmp;
 
       D3DXMatrixRotationY(&tmp, D3DXToRadian(180));
