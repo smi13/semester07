@@ -11,3 +11,7 @@ move lab2.rar ../
 cd ../lab3
 call release.bat
 move lab3.rar ../
+
+cd ../lab4
+call release.bat
+move lab4.rar ../

@@ -15,7 +15,7 @@
 
 namespace cg_labs
 {
-   class lab3App : public cglApp
+   class lab4App : public cglApp
    {
    public:
 
@@ -25,7 +25,7 @@ namespace cg_labs
 
       ~lab3App();
 
-      friend class InputProcessor<lab3App>;
+      friend class InputProcessor<lab4App>;
 
    protected:
 

@@ -12,7 +12,7 @@
 #include <crtdbg.h>
 #include <Windows.h>
 
-#include "lab3_app.h"
+#include "lab4_app.h"
 #include "object.h"
 
 /**
@@ -29,7 +29,7 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInsatnce,
                    LPTSTR lpszCommandLine, int nCmdShow)
 {
-   cg_labs::lab3App app(800, 600, (void*)hInstance, nCmdShow);
+   cg_labs::lab4App app(800, 600, (void*)hInstance, nCmdShow);
 
    if (!app.isFailed())
       app.theLoop();

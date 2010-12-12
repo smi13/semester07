@@ -267,11 +267,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Src\Application\lab3_app.cpp"
+				RelativePath=".\Src\Application\lab4_app.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Src\Application\lab3_app.h"
+				RelativePath=".\Src\Application\lab4_app.h"
 				>
 			</File>
 			<File

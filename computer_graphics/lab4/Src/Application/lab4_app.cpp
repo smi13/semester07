@@ -6,7 +6,7 @@
 
 #include "Library/cglD3D.h"
 
-#include "lab3_app.h"
+#include "lab4_app.h"
 #include "comdef.h"
 #include "grid.h"
 #include "mesh_object.h"
@@ -17,7 +17,7 @@
 
 using namespace cg_labs;
 
-lab3App::lab3App( int nW, int nH, void *hInst, int nCmdShow ) : 
+lab4App::lab4App( int nW, int nH, void *hInst, int nCmdShow ) : 
    cglApp(nW, nH, hInst, nCmdShow)
 {   
    setDevice(m_pD3D->getDevice());
@@ -64,7 +64,7 @@ lab3App::lab3App( int nW, int nH, void *hInst, int nCmdShow ) :
    tr2.init();
 }
 
-void lab3App::_renderText()
+void lab4App::_renderText()
 {
    if (getF1())
    {
@@ -72,13 +72,11 @@ void lab3App::_renderText()
       tr1.setInsertionPos(5, 5);
       tr1.setForegroundColor(D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f ));
       tr1.drawTextLine("Controls:");
-      tr1.drawTextLine("1, 2, 3: lights");
+      tr1.drawTextLine("1: light");
       tr1.drawTextLine("Home: wireframe");
       tr1.drawTextLine("Space: switch cameras (WASD)");
       tr1.drawTextLine("Enter: toggle fullscreen");
       tr1.drawTextLine("U: toggle textures");
-      tr1.drawTextLine("F/G/M: toggle Min/Mag/Mip filters");
-      tr1.drawTextLine("+/-: change MipMap LOD Bias value");
       tr1.drawTextLine("F1: Hide help");
       tr1.end();
 
@@ -103,7 +101,7 @@ void lab3App::_renderText()
    }
 }
 
-void lab3App::renderInternal()
+void lab4App::renderInternal()
 { 
    D3DXMATRIX matProj;
    D3DXMatrixPerspectiveFovLH(&matProj, getFieldOfView(), getWHRatio(), 0.1f, 1000.0f);
@@ -118,7 +116,7 @@ void lab3App::renderInternal()
    Renderer::render(_scene);
 }
 
-void lab3App::update()
+void lab4App::update()
 {
    if (_keysPressed['W'])
       _camera->move(0, 60);
@@ -134,19 +132,19 @@ void lab3App::update()
    _flower.stem->update(m_timer.getTime());
 }
 
-bool lab3App::processInput( unsigned int nMsg, int wParam, long lParam )
+bool lab4App::processInput( unsigned int nMsg, int wParam, long lParam )
 {
    _inputProc.handleMessage(this, nMsg, wParam, lParam);
 
    return cglApp::processInput(nMsg, wParam, lParam);
 }
 
-char const * lab3App::getWindowText()
+char const * lab4App::getWindowText()
 {
    return "CG Lab 2. Fedor Zentsev, 4057/2";
 }
 
-lab3App::~lab3App()
+lab4App::~lab4App()
 {
    LPD3DXMATRIXSTACK stack = getStack();
 
