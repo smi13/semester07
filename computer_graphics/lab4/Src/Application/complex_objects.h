@@ -20,8 +20,8 @@ namespace cg_labs
       const float receptacle_radius = 5.0f;
       const float stem_length = 10;
       const float petal_height = 3.5f;
-      const float petal_depth = 0.2f;
-      const float petal_ext = 0.1f;
+      const float petal_depth = 0.5f;
+      const float petal_ext = 0.2f;
       const float petal_width = 2 * (float)M_PI * receptacle_radius / (float)petals_num;      
 
       class Petal : public MeshObject
