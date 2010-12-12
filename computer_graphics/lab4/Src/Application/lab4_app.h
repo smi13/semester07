@@ -19,11 +19,11 @@ namespace cg_labs
    {
    public:
 
-      lab3App( int nW, int nH, void *hInst, int nCmdShow ); 
+      lab4App( int nW, int nH, void *hInst, int nCmdShow ); 
 
       bool processInput( unsigned int nMsg, int wParam, long lParam );
 
-      ~lab3App();
+      ~lab4App();
 
       friend class InputProcessor<lab4App>;
 
@@ -49,7 +49,7 @@ namespace cg_labs
       complex_objects::Flower _flower;
 
       utils::TextRenderer tr1, tr2;
-      InputProcessor<lab3App> _inputProc;
+      InputProcessor<lab4App> _inputProc;
    };
 }
 
