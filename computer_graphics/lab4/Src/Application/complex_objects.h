@@ -16,13 +16,13 @@ namespace cg_labs
 {
    namespace complex_objects
    {
-      const int petals_num = 5;
-      const float receptacle_radius = 5;
+      const int petals_num = 15;
+      const float receptacle_radius = 5.0f;
       const float stem_length = 10;
-      const float petal_height = 5.0f;
-      const float petal_depth = 0.1f;
-      const float petal_ext = 0.4f;
-      const float petal_width = 2 * (float)M_PI * receptacle_radius / (float)petals_num;
+      const float petal_height = 3.5f;
+      const float petal_depth = 0.2f;
+      const float petal_ext = 0.1f;
+      const float petal_width = 2 * (float)M_PI * receptacle_radius / (float)petals_num;      
 
       class Petal : public MeshObject
       {

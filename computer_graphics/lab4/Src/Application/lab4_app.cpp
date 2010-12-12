@@ -23,7 +23,7 @@ lab3App::lab3App( int nW, int nH, void *hInst, int nCmdShow ) :
    setDevice(m_pD3D->getDevice());
    _flower.construct(complex_objects::petals_num);
    ShowCursor(false);
-   _sphericCamera.set(D3DXToRadian(90.0f), D3DXToRadian(45.0f), 60.0f);
+   _sphericCamera.set(D3DXToRadian(90.0f), D3DXToRadian(25.0f), 60.0f);
    _camera = &_sphericCamera;   
 
    D3DXCreateMatrixStack(0, getStackPointer());

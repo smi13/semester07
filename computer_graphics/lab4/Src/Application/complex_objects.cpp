@@ -24,10 +24,10 @@ complex_objects::Flower::Flower( int petals_num )
 void complex_objects::Flower::construct( int petals_num )
 {
    MeshObject *stem_obj = new MeshObject("stem");
-   ShapeCreator::createCylinder(stem_obj, constants::mat2, receptacle_radius / 10.0f,
+   ShapeCreator::createCylinder(stem_obj, constants::stem_mat, receptacle_radius / 10.0f,
       stem_length, 20, petals_num);
    MeshObject *receptacle_obj = new MeshObject("receptacle");
-   ShapeCreator::createCylinder(receptacle_obj, constants::mat3, receptacle_radius,
+   ShapeCreator::createCylinder(receptacle_obj, constants::receptacle_mat, receptacle_radius,
       stem_length / 10.0f, petals_num, 20);
 
    stem = new Node(stem_obj, _stemUpdate);
@@ -42,9 +42,9 @@ void complex_objects::Flower::construct( int petals_num )
    {
       char Buf[50];
       sprintf_s(Buf, "1 %i", i);
-      petals1[i] = new Node(new Petal(Buf, constants::mat3), _petalUpdate);
+      petals1[i] = new Node(new Petal(Buf, constants::petal_mat1), _petalUpdate);
       sprintf_s(Buf, "2 %i", i);
-      petals2[i] = new Node(new Petal(Buf, constants::mat4), _petalUpdate);
+      petals2[i] = new Node(new Petal(Buf, constants::petal_mat2), _petalUpdate);
 
       petals1[i]->addChild(petals2[i]);
       receptacle->addChild(petals1[i]);
@@ -75,7 +75,6 @@ complex_objects::Petal::Petal( const char *name, Material mat ) :
    MeshObject(name)
 {
    ShapeCreator::createBox(this, mat, petal_depth, petal_width, petal_height);
-   //ShapeCreator::createBox(this, mat, 5.0f, 5.0f, 5.0f);
 
    typedef D3D_Util::FVF_Gen<D3DFVF_XYZ | D3DFVF_NORMAL>::Res MeshVertex;
 
@@ -128,17 +127,23 @@ D3DXMATRIX complex_objects::Flower::_stemUpdate( float time, std::string &name )
 
 D3DXMATRIX complex_objects::Flower::_receptacleUpdate( float time, std::string &name )
 {
-   D3DXMATRIX trans;
+   D3DXMATRIX res, tmp;
 
-   D3DXMatrixTranslation(&trans, 0, 0, -stem_length * 0.5f);
-   //D3DXMatrixIdentity(&trans);
+   D3DXMatrixIdentity(&res);
 
-   return trans;
+   D3DXMatrixRotationZ(&tmp, time / 10.0f);
+   res *= tmp;
+   D3DXMatrixTranslation(&tmp, 0, 0, -stem_length * 0.5f);
+   res *= tmp;
+
+   return res;
 }
 
 D3DXMATRIX complex_objects::Flower::_petalUpdate( float time, std::string &name )
 {
    int ind, i;
+
+   static float old_time;
    D3DXMATRIX res;
    D3DXMatrixIdentity(&res);
 
@@ -146,26 +151,49 @@ D3DXMATRIX complex_objects::Flower::_petalUpdate( float time, std::string &name 
 
    if (ind == 1)
    {
-      float angle = (float)M_PI / (float)petals_num, 
+      float angle = (float)M_PI / (float)petals_num,
+         angle2 = (petals_num - 2) * (float)M_PI / (float)petals_num,
          r = receptacle_radius * cosf(angle);
       
       D3DXMATRIX tmp;
 
-      D3DXMatrixTranslation(&tmp, 0.0f, petal_width * 0.5, 0.0f);
+      D3DXMatrixRotationZ(&tmp, i * angle2 + (float)M_PI_2);
       res *= tmp;
-      D3DXMatrixRotationZ(&tmp, i * angle);
+
+      D3DXMatrixTranslation(&tmp, 0.0f, 0.0f, -petal_height * 0.5f);
       res *= tmp;
-      D3DXMatrixTranslation(&tmp, receptacle_radius * sinf(2 * i * angle), 
-         receptacle_radius * cosf(2 * i * angle), 
-         -petal_height * 0.5f - stem_length / 20.0f);
-      //res *= tmp;
+
+      D3DXVECTOR3 vec(r * cosf(2 * i * angle), -r * sinf(2 * i * angle), 0.0f);
+      D3DXMatrixRotationAxis(&tmp, &vec, cosf(time - 0.4f * i) - 0.8f);
+      res *= tmp;
+
+      D3DXMatrixTranslation(&tmp, 0.0f, 0.0f, 
+         petal_height * 0.5f);
+      res *= tmp;
       
+      D3DXMatrixTranslation(&tmp, -r * sinf(2 * i * angle), 
+         -r * cosf(2 * i * angle), 
+         -petal_height * 0.5f - stem_length / 20.0f);
+      res *= tmp;      
    }
    else if (ind == 2)
    {
+      float angle = 0.5f * cosf(time - 0.4f * i) + D3DXToRadian(30);
       D3DXMATRIX tmp;
-      D3DXMatrixRotationX(&tmp, D3DXToRadian(180));
+
+      D3DXMatrixRotationY(&tmp, D3DXToRadian(180));
       res *= tmp;
+
+      D3DXMatrixTranslation(&tmp, 0.0f, 0.0f, -petal_height * 0.5f);
+      res *= tmp;
+
+      D3DXMatrixRotationY(&tmp, 
+         i % 2 ? angle  : -angle);
+      res *= tmp;
+
+      D3DXMatrixTranslation(&tmp, 0.0f, 0.0f, petal_height * 0.5f);
+      res *= tmp;
+
       D3DXMatrixTranslation(&tmp, 0.0f, 0.0f, -petal_height);
       res *= tmp;
    }
