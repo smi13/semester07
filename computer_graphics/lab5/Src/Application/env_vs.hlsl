@@ -4,14 +4,14 @@ float fresnel_pow;
 
 struct VS_INPUT
 {
-   float4 position : POSITION0;
-   float3 normal : NORMAL0;	
-   float2 texCoord : TEXCOORD0;
+   float4 position : POSITION;
+   float3 normal : NORMAL;	
+   float2 texCoord : TEXCOORD;
 };
 
 struct VS_OUTPUT
 {
-   float4 position : POSITION0;      
+   float4 position : POSITION;      
    float2 texCoord : TEXCOORD0;
    
    //I really do not know the other way to pass sth to PS :(

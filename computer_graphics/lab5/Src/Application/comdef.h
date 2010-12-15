@@ -5,8 +5,8 @@
 
 namespace cg_labs
 {
-   const unsigned long VertexFormat = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | 
-      D3DFVF_TEX2 | D3DFVF_TEXCOORDSIZE3(0) | D3DFVF_TEXCOORDSIZE2(1);
+   const unsigned long VertexFormat = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;/* | D3DFVF_DIFFUSE | 
+      D3DFVF_TEX2 | D3DFVF_TEXCOORDSIZE3(0) | D3DFVF_TEXCOORDSIZE2(1);*/
       //D3DFVF_TEXCOORDSIZE3(0) |
       //D3DFVF_TEXCOORDSIZE2(1) ;
             
@@ -16,9 +16,7 @@ namespace cg_labs
    {
       float m_pos[3];
       float m_normal[3];
-      D3DCOLOR m_diffuse;
-      float m_tex_1[3];
-      float m_tex_2[2];
+      float m_tex_1[2];
    };
    //typedef D3D_Util::FVF_Gen<VertexFormat>::Res Vertex;
 }

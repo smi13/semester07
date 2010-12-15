@@ -139,12 +139,12 @@ void Grid::_buildObject()
          
          pVertices[offset].m_tex_1[x] = xsign * (vy - 0.5f);
          pVertices[offset].m_tex_1[y] = ysign * (vx - 0.5f);
-         pVertices[offset].m_tex_1[z] = zsign * 1.3f;
+         //pVertices[offset].m_tex_1[z] = zsign * 1.3f;
          /*pVertices[offset].m_tex_1[2] = 0.0f;*/
-         pVertices[offset].m_tex_2[0] = vx;
-         pVertices[offset].m_tex_2[1] = vy;
+         //pVertices[offset].m_tex_2[0] = vx;
+         //pVertices[offset].m_tex_2[1] = vy;
 
-         pVertices[offset].m_diffuse = D3DCOLOR_XRGB(255, 255, 255);
+         //pVertices[offset].m_diffuse = D3DCOLOR_XRGB(255, 255, 255);
       }
 
    for (int j = 0; j < _n; j++)

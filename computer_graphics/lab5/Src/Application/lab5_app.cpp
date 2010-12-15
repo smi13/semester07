@@ -103,7 +103,7 @@ lab5app::lab5app( int nW, int nH, void *hInst, int nCmdShow ) :
    DWORD _numMaterials;
    ID3DXBuffer *pMat = NULL;
 
-   D3DXLoadMeshFromX("media/sphere.x", D3DXMESH_SYSTEMMEM, getDevice(),
+   D3DXLoadMeshFromX("media/teapot.x", D3DXMESH_SYSTEMMEM, getDevice(),
       NULL, &pMat, NULL, &_numMaterials, &_mesh);
 
    D3DXCreateTextureFromFile(getDevice(), 

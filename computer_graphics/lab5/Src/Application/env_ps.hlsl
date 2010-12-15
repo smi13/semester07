@@ -8,7 +8,7 @@ struct PS_INPUT
 
 struct PS_OUTPUT
 {
-   float4 color : COLOR0;
+   float4 color : COLOR;
 };
 
 sampler tex : register(s0);
