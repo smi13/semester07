@@ -14,6 +14,7 @@ struct VS_OUTPUT
    float4 position : POSITION0;      
    float2 texCoord : TEXCOORD0;
    
+   //I really do not know the other way to pass sth to PS :(
    float fresnel_coef : TEXCOORD6;
    float3 refl_vector : TEXCOORD7;
 };
