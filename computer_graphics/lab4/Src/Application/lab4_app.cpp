@@ -143,7 +143,7 @@ bool lab4App::processInput( unsigned int nMsg, int wParam, long lParam )
 
 char const * lab4App::getWindowText()
 {
-   return "CG Lab 2. Fedor Zentsev, 4057/2";
+   return "CG Lab 4. Fedor Zentsev, 4057/2";
 }
 
 lab4App::~lab4App()
