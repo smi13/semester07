@@ -80,9 +80,9 @@ lab5app::lab5app( int nW, int nH, void *hInst, int nCmdShow ) :
 
    //Constructing the scene: lights
    _scene << new PointLight("pointlight1", D3DXVECTOR3(10.0f, 20.0f, 0.0f), constants::white)
-      << new PointLight("pointlight2", D3DXVECTOR3(-10.0f, 20.0f, 0.0f), constants::white)
-      << new PointLight("pointlight3", D3DXVECTOR3(0.0f, 20.0f, 10.0f), constants::white)
-      << new PointLight("pointlight4", D3DXVECTOR3(0.0f, 20.0f, -10.0f), constants::white);
+      << new PointLight("pointlight2", D3DXVECTOR3(-10.0f, 20.0f, 0.0f), constants::white);
+      //<< new PointLight("pointlight3", D3DXVECTOR3(0.0f, 20.0f, 10.0f), constants::white);
+   //   << new PointLight("pointlight4", D3DXVECTOR3(0.0f, 20.0f, -10.0f), constants::white);*/
 
    //Obtain cube texture
    getDevice()->CreateCubeTexture(512, 1, D3DUSAGE_RENDERTARGET, D3DFMT_X8R8G8B8, 
@@ -103,11 +103,11 @@ lab5app::lab5app( int nW, int nH, void *hInst, int nCmdShow ) :
    DWORD _numMaterials;
    ID3DXBuffer *pMat = NULL;
 
-   D3DXLoadMeshFromX("media/teapot.x", D3DXMESH_SYSTEMMEM, getDevice(),
-      NULL, &pMat, NULL, &_numMaterials, &_mesh);
+   D3DXCreateBox(getDevice(), 1.2f, 1.2f, 1.2f, &_mesh, 0);
+   //D3DXLoadMeshFromX("media/teapot.x", D3DXMESH_SYSTEMMEM, getDevice(),
+    //  NULL, &pMat, NULL, &_numMaterials, &_mesh);
 
-   D3DXCreateTextureFromFile(getDevice(), 
-      "media/wood01.jpg", &_meshTex);
+   D3DXCreateTextureFromFile(getDevice(), "media/wood01.jpg", &_meshTex);
 }
 
 void lab5app::_renderText()
@@ -166,16 +166,16 @@ void lab5app::_renderEnvMesh( D3DXMATRIX &proj )
    D3DXMATRIX world, tmp_mat;
    D3DXMatrixIdentity(&world);
 
-   D3DXMatrixTranslation(&tmp_mat, 0.0f, 2.0f, 0.0f);
+   D3DXMatrixTranslation(&tmp_mat, 0.0f, 1.0f, 0.0f);
    world *= tmp_mat;
-
+   
    D3DXMatrixScaling(&tmp_mat, 15.0f, 15.0f, 15.0f);
    world *= tmp_mat;
 
    D3DXMATRIX mv = world * *(_camera->getMatrix());
    D3DXMATRIX mvp = mv * proj;
-   //D3DXVECTOR4 eyepos = D3DXVECTOR4(_camera->getEyePos());
-   D3DXVECTOR4 eyepos = D3DXVECTOR4(0.0f, 0.0f, 5.0f, 1.0f);
+   D3DXVECTOR4 eyepos = D3DXVECTOR4(_camera->getEyePos());
+   //D3DXVECTOR4 eyepos = D3DXVECTOR4(0.0f, 0.0f, 5.0f, 1.0f);
 
    _shader.constantTableVS->SetMatrix(getDevice(), "mvp", &mvp);
    _shader.constantTableVS->SetMatrix(getDevice(), "mv", &mv);

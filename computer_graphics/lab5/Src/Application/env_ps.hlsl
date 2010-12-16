@@ -21,7 +21,9 @@ PS_OUTPUT main( PS_INPUT IN )
    float4 c1 = texCUBE(cube_tex, IN.refl_vector);
    float4 c2 = tex2D(tex, IN.texCoord);
    
-   OUT.color = c1 * (1 - IN.fresnel_coef) + IN.fresnel_coef * c2;
+   //OUT.color = c1 * (1 - IN.fresnel_coef) + IN.fresnel_coef * c2;
+   
+   OUT.color = c1; 
    
    return OUT;
 }
