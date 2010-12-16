@@ -26,7 +26,7 @@ void CubeTextureCreator::create( IDirect3DCubeTexture9 **tex, Scene &scene )
    // Loop through the six faces of the cube map
    for(DWORD i = 0; i < 6; i++)
    {
-      float eye_y = 6.0f;
+      float eye_y = 6.1f;
       // Standard view that will be overridden below
       D3DXVECTOR3 vEnvEyePt = D3DXVECTOR3(0.0f, eye_y, 0.0f);
       D3DXVECTOR3 vLookatPt, vUpVec;

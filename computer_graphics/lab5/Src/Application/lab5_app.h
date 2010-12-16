@@ -6,7 +6,6 @@
 #include "Library/cglApp.h"
 
 #include "shader.h"
-#include "reflection_cube.h"
 #include "mesh_object.h"
 #include "scene.h"
 #include "camera.h"
@@ -50,6 +49,8 @@ namespace cg_labs
       Shader _shader;
 
       ID3DXMesh *_mesh;
+      DWORD _numMaterials;      
+
       IDirect3DTexture9 *_meshTex;
       IDirect3DCubeTexture9 *_envTex;
 

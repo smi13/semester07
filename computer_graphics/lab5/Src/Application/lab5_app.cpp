@@ -8,9 +8,7 @@
 
 #include "lab5_app.h"
 #include "comdef.h"
-#include "reflection_cube.h"
 #include "axes.h"
-#include "grid.h"
 #include "mesh_object.h"
 #include "render_context.h"
 #include "utils.h"
@@ -44,9 +42,18 @@ lab5app::lab5app( int nW, int nH, void *hInst, int nCmdShow ) :
    getDevice()->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
    getDevice()->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
 
+  // float vertex_fogstart = 50.0f, vertex_fogend = 200.0f, vertex_fogdensity = 0.7f;
+  // getDevice()->SetRenderState(D3DRS_FOGENABLE, TRUE);
+  // getDevice()->SetRenderState(D3DRS_FOGTABLEMODE, D3DFOG_LINEAR); 
+  // getDevice()->SetRenderState(D3DRS_FOGSTART, *(DWORD *)&vertex_fogstart); 
+  // getDevice()->SetRenderState(D3DRS_FOGEND, *(DWORD *)&vertex_fogend); 
+  // getDevice()->SetRenderState(D3DRS_FOGCOLOR, constants::white);
+  // getDevice()->SetRenderState(D3DRS_FOGDENSITY, *(DWORD *)&vertex_fogdensity );
+   
    SetWindowText((HWND)m_hWnd, getWindowText());
 
    m_nClearColor = D3DCOLOR_XRGB(0, 0, 0);
+   //m_nClearColor = D3DCOLOR_XRGB(255, 255, 255);
 
    std::vector<std::string> buf;
 
@@ -58,7 +65,7 @@ lab5app::lab5app( int nW, int nH, void *hInst, int nCmdShow ) :
       << new MeshObject("room", "media", "room.x")
       << new MeshObject("chair", "media", "chair.x");      
 
-   float step = 35.0f;
+   float step = 70.0f;
 
    _scene.getObject("room")->scale(5.0f);
    
@@ -80,9 +87,9 @@ lab5app::lab5app( int nW, int nH, void *hInst, int nCmdShow ) :
 
    //Constructing the scene: lights
    _scene << new PointLight("pointlight1", D3DXVECTOR3(10.0f, 20.0f, 0.0f), constants::white)
-      << new PointLight("pointlight2", D3DXVECTOR3(-10.0f, 20.0f, 0.0f), constants::white);
-      //<< new PointLight("pointlight3", D3DXVECTOR3(0.0f, 20.0f, 10.0f), constants::white);
-   //   << new PointLight("pointlight4", D3DXVECTOR3(0.0f, 20.0f, -10.0f), constants::white);*/
+      << new PointLight("pointlight2", D3DXVECTOR3(-10.0f, 20.0f, 0.0f), constants::white)
+      << new PointLight("pointlight3", D3DXVECTOR3(0.0f, 20.0f, 10.0f), constants::white)
+      << new PointLight("pointlight4", D3DXVECTOR3(0.0f, 20.0f, -10.0f), constants::white);
 
    //Obtain cube texture
    getDevice()->CreateCubeTexture(512, 1, D3DUSAGE_RENDERTARGET, D3DFMT_X8R8G8B8, 
@@ -103,11 +110,16 @@ lab5app::lab5app( int nW, int nH, void *hInst, int nCmdShow ) :
    DWORD _numMaterials;
    ID3DXBuffer *pMat = NULL;
 
-   D3DXCreateBox(getDevice(), 1.2f, 1.2f, 1.2f, &_mesh, 0);
-   //D3DXLoadMeshFromX("media/teapot.x", D3DXMESH_SYSTEMMEM, getDevice(),
-    //  NULL, &pMat, NULL, &_numMaterials, &_mesh);
+   //D3DXCreateBox(getDevice(), 5.0f, 5.0f, 5.0f, &_mesh, 0);
 
-   D3DXCreateTextureFromFile(getDevice(), "media/wood01.jpg", &_meshTex);
+   D3DXLoadMeshFromX("media/sphere.x", D3DXMESH_SYSTEMMEM, getDevice(),
+      NULL, &pMat, NULL, &_numMaterials, &_mesh);
+
+   if (pMat != NULL)
+      pMat->Release();
+
+   D3DXCreateTextureFromFile(getDevice(), 
+      "media/wood01.jpg", &_meshTex);
 }
 
 void lab5app::_renderText()
@@ -168,9 +180,13 @@ void lab5app::_renderEnvMesh( D3DXMATRIX &proj )
 
    D3DXMatrixTranslation(&tmp_mat, 0.0f, 1.0f, 0.0f);
    world *= tmp_mat;
-   
-   D3DXMatrixScaling(&tmp_mat, 15.0f, 15.0f, 15.0f);
+
+   D3DXMatrixScaling(&tmp_mat, 18.0f, 18.0f, 18.0f);
    world *= tmp_mat;
+
+   float det;
+   D3DXMatrixInverse(&tmp_mat, &det, &world);
+   D3DXMatrixTranspose(&tmp_mat, &tmp_mat);
 
    D3DXMATRIX mv = world * *(_camera->getMatrix());
    D3DXMATRIX mvp = mv * proj;
@@ -178,7 +194,8 @@ void lab5app::_renderEnvMesh( D3DXMATRIX &proj )
    //D3DXVECTOR4 eyepos = D3DXVECTOR4(0.0f, 0.0f, 5.0f, 1.0f);
 
    _shader.constantTableVS->SetMatrix(getDevice(), "mvp", &mvp);
-   _shader.constantTableVS->SetMatrix(getDevice(), "mv", &mv);
+   _shader.constantTableVS->SetMatrix(getDevice(), "m", &world);
+   _shader.constantTableVS->SetMatrix(getDevice(), "inv_trans_m", &tmp_mat);
    _shader.constantTableVS->SetVector(getDevice(), "eyepos", &eyepos);
    _shader.constantTableVS->SetFloat(getDevice(), "fresnel_pow", getFresnelPow());
 

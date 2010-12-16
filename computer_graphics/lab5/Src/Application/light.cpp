@@ -5,8 +5,8 @@
 
 using namespace cg_labs;
 
-Light::Light( const char *name, D3DLIGHTTYPE type, Grid *obj ) : 
-   _type(type), _name(std::string(name)), _id(getLightCounter()), _obj(obj)
+Light::Light( const char *name, D3DLIGHTTYPE type ) : 
+   _type(type), _name(std::string(name)), _id(getLightCounter())
 {
 }
 
@@ -20,37 +20,30 @@ int Light::getType()
    return _type;
 }
 
-Object *Light::getObject()
-{
-   return _obj;
-}
-
 void Light::toggle()
 {
    if (_enabled)
    {
       _enabled = false;
          
-      if (_obj != 0)
-         _obj->setColor(D3DCOLOR_XRGB(0, 0, 0));
+      /*if (_obj != 0)
+         ;_obj->setColor(D3DCOLOR_XRGB(0, 0, 0));*/
    }
    else
    {
       _enabled = true;
 
-      if (_obj != 0)
-         _obj->setColor((DWORD)_col);
+      /*if (_obj != 0)
+         _obj->setColor((DWORD)_col);*/
    }
 }
 
 Light::~Light()
 {
-   if (_obj != 0)
-      delete _obj;
 }
 
-PointLight::PointLight( const char *name, D3DXVECTOR3 &pos, D3DXCOLOR col, Grid *obj ) : 
-   Light(name, D3DLIGHT_POINT, obj), _pos(pos)
+PointLight::PointLight( const char *name, D3DXVECTOR3 &pos, D3DXCOLOR col ) : 
+   Light(name, D3DLIGHT_POINT), _pos(pos)
 {
    _col = col;
 }
@@ -76,8 +69,8 @@ void PointLight::set()
 }
 
 DirectionalLight::DirectionalLight( const char *name,  
-                                   D3DXVECTOR3 &dir, D3DXCOLOR col, Grid *obj ) :
-   Light(name, D3DLIGHT_DIRECTIONAL, obj), _dir(dir)
+                                   D3DXVECTOR3 &dir, D3DXCOLOR col ) :
+   Light(name, D3DLIGHT_DIRECTIONAL), _dir(dir)
 {
    D3DXVec3Normalize(&_dir, &_dir);
    _col = col;
@@ -104,8 +97,8 @@ void DirectionalLight::set()
 }
 
 SpotLight::SpotLight( const char *name,  D3DXVECTOR3 &pos, D3DXVECTOR3 &dir, 
-                     float theta, float phi, D3DXCOLOR col, Grid *obj ) :
-   Light(name, D3DLIGHT_SPOT, obj), _dir(dir), _pos(pos), _theta(theta), _phi(phi)
+                     float theta, float phi, D3DXCOLOR col  ) :
+   Light(name, D3DLIGHT_SPOT), _dir(dir), _pos(pos), _theta(theta), _phi(phi)
 {
    D3DXVec3Normalize(&_dir, &_dir);
    _col = col;
@@ -113,16 +106,11 @@ SpotLight::SpotLight( const char *name,  D3DXVECTOR3 &pos, D3DXVECTOR3 &dir,
 
 void SpotLight::rotateX( float angle )
 {
-   if (_obj != 0)
-      _obj->rotateX(angle);
 }
 
 void SpotLight::rotateY( float angle )
 {
    D3DXMATRIX rot;
-
-   if (_obj != 0)
-      _obj->rotateY(angle);
 
    D3DXMatrixRotationY(&rot, angle);
 
@@ -137,8 +125,7 @@ void SpotLight::rotateY( float angle )
 void SpotLight::rotateZ( float angle )
 {
    D3DXMATRIX rot;
-   _obj->rotateZ(angle);
-   
+
    D3DXMatrixRotationZ(&rot, angle);
 
    D3DXVECTOR4 tmp;
@@ -152,9 +139,6 @@ void SpotLight::rotateZ( float angle )
 void SpotLight::translate( float x, float y, float z )
 {
    _pos += D3DXVECTOR3(x, y, z);
-
-   if (_obj != 0)
-      _obj->translate(x, y, z);
 }
 
 void SpotLight::set()

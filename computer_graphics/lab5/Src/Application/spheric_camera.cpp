@@ -48,7 +48,7 @@ void SphericCamera::rotate( float dx, float dy )
    }
    else if (dy > 0)
    {
-      if (_theta < M_PI_2 - 0.3)
+      if (_theta < M_PI_2 - 0.7)
          _theta += dy;
    }
 

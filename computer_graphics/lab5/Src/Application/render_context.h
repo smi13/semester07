@@ -38,8 +38,6 @@ namespace cg_labs
 
    float getFresnelPow();
    void setFresnelPow( float new_pow );
-
-   
 }
 
 

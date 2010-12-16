@@ -251,18 +251,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Src\Application\FVF_Gen.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Src\Application\grid.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Src\Application\grid.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Src\Application\input_processor.h"
 				>
 			</File>

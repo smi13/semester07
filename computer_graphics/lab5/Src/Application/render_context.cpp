@@ -9,7 +9,7 @@ static HWND hWnd;
 static IDirect3DDevice9 *device;
 static int height, width;
 static int fill_mode = D3DFILL_SOLID;
-static float fov, wh_ratio, fresnel_pow = 4.0f;
+static float fov, wh_ratio, fresnel_pow = -1.0f;
 static bool lbutton_pressed = false, textures_enabled = true, _f1 = false;
 static int light_counter = 0;
 

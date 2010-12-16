@@ -1,7 +1,7 @@
 #ifndef _light_h
 #define _light_h
 
-#include "grid.h"
+#include <vector>
 
 namespace cg_labs
 {
@@ -9,13 +9,12 @@ namespace cg_labs
    {
    public:
 
-      Light( const char *name, D3DLIGHTTYPE type, Grid *obj = 0 );
+      Light( const char *name, D3DLIGHTTYPE type );
 
       virtual void set() = 0;
 
       std::string &getName();
       int getType();
-      Object *getObject();
       void toggle();
 
       virtual void rotateX( float angle ) {}
@@ -31,7 +30,6 @@ namespace cg_labs
       D3DXCOLOR _col;
       bool _enabled;
       std::string _name;
-      Grid *_obj;
 
    private:
       Light();
@@ -41,7 +39,7 @@ namespace cg_labs
    {
    public:
 
-      PointLight( const char *name, D3DXVECTOR3 &pos, D3DXCOLOR col, Grid *obj = 0 );
+      PointLight( const char *name, D3DXVECTOR3 &pos, D3DXCOLOR col );
 
       virtual void set();
 
@@ -56,7 +54,7 @@ namespace cg_labs
    public:
 
       SpotLight( const char *name,  D3DXVECTOR3 &pos, D3DXVECTOR3 &dir, 
-         float theta, float phi, D3DXCOLOR col, Grid *obj = 0 );
+         float theta, float phi, D3DXCOLOR col );
 
       virtual void rotateX( float angle );
       virtual void rotateY( float angle );
@@ -75,7 +73,7 @@ namespace cg_labs
    {
    public:
 
-      DirectionalLight( const char *name,  D3DXVECTOR3 &dir, D3DXCOLOR col, Grid *obj = 0 );
+      DirectionalLight( const char *name,  D3DXVECTOR3 &dir, D3DXCOLOR col );
 
       virtual void set();
 

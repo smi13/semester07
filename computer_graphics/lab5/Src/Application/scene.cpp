@@ -8,14 +8,6 @@ void Renderer::render( Scene &scene )
 {
    for (ObjectToNameMap::iterator it = scene._objects.begin(); it != scene._objects.end(); ++it)
       it->second->render();
-
-   for (LightToNameMap::iterator it = scene._lights.begin(); it != scene._lights.end(); ++it)
-   {
-      Object *obj = it->second->getObject();
-
-      if (obj != 0)
-         obj->render();
-   }
 }
 
 void Renderer::lightUp( Scene &scene )
