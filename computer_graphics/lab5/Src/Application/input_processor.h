@@ -112,10 +112,10 @@ namespace cg_labs
          if (wParam == VK_F1)
             toggleF1();
 
-         if (app->_keysPressed[VK_ADD] || app->_keysPressed[VK_OEM_PLUS])
+         if (wParam == VK_ADD)
             setFresnelPow(getFresnelPow() + 0.1f);
 
-         if (app->_keysPressed[VK_SUBTRACT])
+         if (wParam == VK_SUBTRACT)
             setFresnelPow(getFresnelPow() - 0.1f);
       }
 

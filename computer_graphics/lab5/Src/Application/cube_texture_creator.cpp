@@ -33,29 +33,29 @@ void CubeTextureCreator::create( IDirect3DCubeTexture9 **tex, Scene &scene )
 
       switch(i)
       {
-      case D3DCUBEMAP_FACE_POSITIVE_X:
-         vLookatPt = D3DXVECTOR3(eye_y, eye_y, 0.0f);
-         vUpVec    = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-         break;
       case D3DCUBEMAP_FACE_NEGATIVE_X:
-         vLookatPt = D3DXVECTOR3(-eye_y, eye_y, 0.0f);
-         vUpVec    = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+         vLookatPt = D3DXVECTOR3(eye_y, eye_y, 0.0f);
+         vUpVec    = D3DXVECTOR3(0.0f, -1.0f, 0.0f);
          break;
-      case D3DCUBEMAP_FACE_POSITIVE_Y:
+      case D3DCUBEMAP_FACE_POSITIVE_X:
+         vLookatPt = D3DXVECTOR3(-eye_y, eye_y, 0.0f);
+         vUpVec    = D3DXVECTOR3(0.0f, -1.0f, 0.0f);
+         break;
+      case D3DCUBEMAP_FACE_NEGATIVE_Y:
          vLookatPt = D3DXVECTOR3(0.0f, 10.0f, 0.0f);
          vUpVec    = D3DXVECTOR3(0.0f, 0.0f, -1.0f);
          break;
-      case D3DCUBEMAP_FACE_NEGATIVE_Y:
+      case D3DCUBEMAP_FACE_POSITIVE_Y:
          vLookatPt = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
          vUpVec    = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
          break;
-      case D3DCUBEMAP_FACE_POSITIVE_Z:
-         vLookatPt = D3DXVECTOR3(0.0f, eye_y, eye_y);
-         vUpVec    = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-         break;
       case D3DCUBEMAP_FACE_NEGATIVE_Z:
+         vLookatPt = D3DXVECTOR3(0.0f, eye_y, eye_y);
+         vUpVec    = D3DXVECTOR3(0.0f, -1.0f, 0.0f);
+         break;
+      case D3DCUBEMAP_FACE_POSITIVE_Z:
          vLookatPt = D3DXVECTOR3(0.0f, eye_y, -eye_y);
-         vUpVec    = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+         vUpVec    = D3DXVECTOR3(0.0f, -1.0f, 0.0f);
          break;
       }
 

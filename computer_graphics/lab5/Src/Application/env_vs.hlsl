@@ -35,7 +35,7 @@ VS_OUTPUT main( VS_INPUT IN )
    OUT.fresnel_coef = clamp(pow(1 + dot(normalize(n), normalize(v)), fresnel_pow), 0.1, 0.9);   
    
    //Calculating reflection vector
-   OUT.refl_vector = reflect(v, n);
+   OUT.refl_vector = reflect(v, normalize(n));
       
    //Passing parameters to PS
    OUT.texCoord = IN.texCoord;
