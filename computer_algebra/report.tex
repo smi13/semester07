@@ -1,0 +1,165 @@
+\include{preamble}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\section{Задание}
+
+Пусть задана система $ A $ биномиальных уравнений:
+
+\[
+\left\{ 
+\begin{array}{l l}
+  y_1 - m_1 = 0 \\
+  y_2 - m_2 = 0 \\
+  \cdots \\
+  y_k - m_k = 0
+\end{array} \right.
+\]
+\[m_1, m_2, \cdots, m_k \in M \subset \BB{K}[x_1, x_2, x_3]\]
+
+Требовалось исключить из такой системы $ x_1, x_2, x_3 $, другими словами 
+найти $ \Id{\alpha} = (A) \cap \BB{K}[y_1, y_2, \cdots, y_k] $. Затем
+найти базис Грёбнера идеала $ \alpha $, который является \emph{торическим}. Последний пункт задания - визуализация
+сечения пространства порядков.
+
+\section{Использованный инструментарий}
+
+Использовалась многопользовательская система компьютерной алгебры \begin{tt}SAGE\end{tt} и язык программирования \begin{tt}Python\end{tt}, в частности. Для визуализации был использован пакет \begin{tt}Gfan\end{tt}. 
+
+\newpage
+
+\section{Решения задач и полученные изображения}
+
+\begin{enumerate}
+  \item Система: 
+    \[ \left\{ 
+\begin{array}{l l}
+  y_1  -  x_{1}^2 x_2 = 0 \\
+  y_2  -  x_{1}^7 x_{2}^5 = 0 \\
+  y_3  -  x_{1}^4 x_{2}^3 = 0
+\end{array} \right.
+\]
+
+Исходный код программы:
+\lstset{language=python, caption=1.py,%
+label=source-code, basicstyle=\footnotesize,%
+numbers=left, numberstyle=\footnotesize, numbersep=5pt, frame=single, breaklines=true, breakatwhitespace=false,%
+inputencoding=utf8x}
+\lstinputlisting{1.py}
+
+Изображение проекций сечения конусами основного конуса, выводы программы \begin{tt}gfan\_render\end{tt}:
+
+\begin{center}
+\includegraphics[scale=0.4]{a.pdf}
+\end{center}
+
+\newpage
+
+  \item Система: 
+    \[ \left\{ 
+\begin{array}{l l}
+  y_1  -  x_{1} x_3^2 = 0 \\
+  y_2  -  x_{2}^5 = 0 \\
+  y_3  -  x_{1}^2 x_{2}^3 = 0 \\
+  y_4  -  x_3^3 x_4 = 0 \\
+  y_5  -  x_2 x_4^2 = 0 \\
+\end{array} \right.
+\]
+
+Исходный код программы:
+\lstset{language=python, caption=2.py,%
+label=source-code, basicstyle=\footnotesize,%
+numbers=left, numberstyle=\footnotesize, numbersep=5pt, frame=single, breaklines=true, breakatwhitespace=false,%
+inputencoding=utf8x}
+\lstinputlisting{2.py}
+
+\begin{center}
+\includegraphics[scale=0.06]{mix4.pdf}
+\begin{tt}--shiftVariables 0, 1\end{tt}
+
+\includegraphics[scale=0.06]{mix5.pdf}
+\begin{tt}--shiftVariables 2, 3\end{tt}
+
+\includegraphics[scale=0.06]{2_4.pdf} \\ 
+\begin{tt}--shiftVariables 4\end{tt}
+\end{center}
+
+\newpage
+
+\item Система
+
+\[ \left\{ 
+\begin{array}{l l}
+  y_1 - x_1^3 x_3^5 = 0 \\
+  y_2 - x_1^2 x_3 x_2^4 = 0 \\
+  y_3 - x_2^2 x_3^3 = 0 \\
+  y_4 - x_2^3 x_1 = 0 \\
+  y_5 - x_3 x_2 x_1 x_5 = 0 \\
+  y_6 - x_4 x_5^2 = 0 \\
+  y_7 - x_5 x_2^2 x_1^3 = 0 \\
+\end{array} \right. \]
+
+Исходный код программы:
+\lstset{language=python, caption=2.py,%
+label=source-code, basicstyle=\footnotesize,%
+numbers=left, numberstyle=\footnotesize, numbersep=5pt, frame=single, breaklines=true, breakatwhitespace=false,%
+inputencoding=utf8x}
+\lstinputlisting{2.py}
+
+Изображение проекций сечения конусами основного конуса, вывод программы \begin{tt}gfan\_render\end{tt}:
+
+\begin{center}
+\includegraphics[scale=0.06]{mix1.pdf}
+\begin{tt}--shiftVariables 0, 1\end{tt}
+\end{center}
+\newpage
+
+\begin{center}
+\includegraphics[scale=0.06]{mix2.pdf}
+\begin{tt}--shiftVariables 2, 3\end{tt}
+
+\includegraphics[scale=0.06]{mix3.pdf}
+\begin{tt}--shiftVariables 4, 5\end{tt}
+
+\includegraphics[scale=0.06]{3_6.pdf} \\ 
+\begin{tt}--shiftVariables 6\end{tt}
+
+\end{center}
+
+
+\end{enumerate}
+
+\newpage
+
+\section{Результаты}
+
+\begin{enumerate}
+  \item 
+    \lstset{language=bash, caption=res1.txt,%
+label=source-code, basicstyle=\footnotesize,%
+numbers=left, numberstyle=\footnotesize, numbersep=5pt, frame=single, breaklines=true, breakatwhitespace=false,%
+inputencoding=utf8x}
+\lstinputlisting{res1.txt}
+
+\item
+   \lstset{language=bash, caption=res2.txt,%
+label=source-code, basicstyle=\footnotesize,%
+numbers=left, numberstyle=\footnotesize, numbersep=5pt, frame=single, breaklines=true, breakatwhitespace=false,%
+inputencoding=utf8x}
+\lstinputlisting{res2.txt}
+
+\item
+   \lstset{language=bash, caption=res3.txt,%
+label=source-code, basicstyle=\footnotesize,%
+numbers=left, numberstyle=\footnotesize, numbersep=5pt, frame=single, breaklines=true, breakatwhitespace=false,%
+inputencoding=utf8x}
+\lstinputlisting{res3.txt}
+
+\end{enumerate}
+
+
+\end{document}
+
