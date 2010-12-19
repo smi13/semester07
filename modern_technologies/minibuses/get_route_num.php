@@ -1,6 +1,6 @@
 <?php
 
-    $link = mysql_connect("localhost", "root", "12345") or die("Could not connect");
+    $link = mysql_connect("1", "1", "1") or die("Could not connect");
     if( !$link ) die( mysql_error() );
 
     $usertable = "minibuses";
