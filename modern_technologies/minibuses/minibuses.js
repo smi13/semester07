@@ -17,8 +17,9 @@ minibuses.initialize = function () {
     };
 
     map = new google.maps.Map(document.getElementById("map_canvas"),
-        map_options);
+        map_options);            
         
     UIElements.initialize();
     ControlHandlers.initialize();
+    Utils.initialize();
 }

@@ -13,12 +13,21 @@
 <script type="text/javascript" src="minibuses.js"></script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="ui_elements.js"></script>
+<script type="text/javascript" src="utils.js"></script>
 <script type="text/javascript" src="control_handlers.js"></script>
 </head>
 <body onload="minibuses.initialize()">
   <div id="map_canvas" style="width:80%; height:80%;"></div>
   <ul id="list2">
-      <li> Первый элемент
+      <li> Click on the minibus name on the left to show its' route
+      <li> Click on 'Polytech' button to center the map to SPBSTU
+      <li> Click on 'New minibus' button on the right to add new route
+          <ul>
+              <li> First click on it
+              <li> Click on the map to position markers and route points
+              <li> Click 'Finish route'
+              <li> Type new minibus name
+          </ul>
   </ul>
 </body>
 </html>
