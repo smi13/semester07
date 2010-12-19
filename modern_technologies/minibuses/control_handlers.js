@@ -53,7 +53,7 @@ ControlHandlers.showRoute = function () {
             }
 
             document.getElementById("Current route length:").innerHTML =
-                "Current route length: " + String(length) + "km";
+                "Current route length: " + String(length.toFixed(3)) + "km";
     });
 }
 
