@@ -110,12 +110,13 @@ lab5app::lab5app( int nW, int nH, void *hInst, int nCmdShow ) :
    DWORD _numMaterials;
    ID3DXBuffer *pMat = NULL;
 
+   D3DXCreateSphere(getDevice(), 1.0f, 4, 4, &_mesh, 0);
    //D3DXCreateBox(getDevice(), 5.0f, 5.0f, 5.0f, &_mesh, 0);
 
    //D3DXCreateTeapot(getDevice(), &_mesh, 0);
 
-   D3DXLoadMeshFromX("media/sphere.x", D3DXMESH_SYSTEMMEM, getDevice(),
-      NULL, &pMat, NULL, &_numMaterials, &_mesh);
+//   D3DXLoadMeshFromX("media/sphere.x", D3DXMESH_SYSTEMMEM, getDevice(),
+  //    NULL, &pMat, NULL, &_numMaterials, &_mesh);
 
    if (pMat != NULL)
       pMat->Release();
