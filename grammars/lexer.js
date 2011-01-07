@@ -76,10 +76,11 @@ lexer.initialize = function () {
 
      editAreaLoader.init({
                 id : "codeTextArea",		// textarea id
-                syntax: "lll",			// syntax to be uses for highgliting
+                syntax: "c",			// syntax to be uses for highgliting
                 allow_toggle: false,
                 font_size: 12,
-                replace_tab_by_spaces: true,
+                gecko_spellcheck: false,
+                
                 start_highlight: true,		// to display with highlight mode on start-up
                 toolbar: "*"
         });
