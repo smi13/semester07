@@ -8,11 +8,19 @@
         <script language="javascript" type="text/javascript" src="lexer.js"></script>
         <script language="javascript" type="text/javascript" src="delta.js"></script>
         <script language="javascript" type="text/javascript" src="lex_result.js"></script>
+        <script language="javascript" type="text/javascript" src="graphdracula/js/raphael-min.js"></script>
+        <script language="javascript" type="text/javascript" src="graphdracula/js/dracula_graffle.js"></script>
+        <script language="javascript" type="text/javascript" src="graphdracula/js/dracula_graph.js"></script>
         <script language="javascript" type="text/javascript" src="edit_area/edit_area_full.js"></script>
         <script language="javascript" type="text/javascript" src="lll_syntax.js"></script>
     </head>
     <body onload="lexer.initialize()">
         <div id="codeForm"></div>
-        <div id="resultForm"></div>          
+        <table>
+            <tr valign="top">
+                <td><div id="resultForm"></div></td>
+                <td><div id="canvas" style="clear:both; float: right"></div></td>
+            </tr>
+        </table>
     </body>
 </html>

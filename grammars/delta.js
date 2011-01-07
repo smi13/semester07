@@ -51,10 +51,10 @@ delta.initialize = function () {
     delta.deltaStorage["comment"] = [ [ not_comment, "comment"], [comment, "comment_found"] ];
 
     delta.endStates["id_found"] = {tokid: "TOK_ID",
-        process: lexResult.addVariable };
+        process: lexResult.addVariable};
 
     delta.endStates["const_found"] = {tokid: "TOK_CONST",
-        process: lexResult.addConstant };
+        process: lexResult.addConstant};
 
     delta.endStates["op_found"] = {tokid: "TOK_OP",
         process: function (token) {
@@ -89,6 +89,42 @@ delta.isEndState = function (state) {
         return true;
     else
         return false;
+}
+
+delta.drawGraph = function () {
+
+    var g = new Graph(),
+        stack = [];
+
+    stack.push(delta.beginState);
+
+    while (stack.length != 0)
+    {
+        st = stack.pop();
+
+        if (delta.deltaStorage[st])
+        {
+            for (var i = 0; i < delta.deltaStorage[st].length; i++)
+            {
+                if (delta.deltaStorage[st][i][1] != st) {
+                    g.addEdge(st, delta.deltaStorage[st][i][1],
+                    {directed: true});
+                    
+                    var ind = $.inArray(stack, delta.deltaStorage[st][i][1]);
+                    
+                    if (ind != -1)
+                        continue;
+                    stack.push(delta.deltaStorage[st][i][1]);
+                }
+             }
+        }
+    }
+
+    var layouter = new Graph.Layout.Spring(g);
+    layouter.layout();
+
+    var renderer = new Graph.Renderer.Raphael('canvas', g, 1000, 600);
+    renderer.draw();
 }
 
 delta.addKeyword = function (keyword) {

@@ -127,4 +127,6 @@ lexer.initialize = function () {
     
     delta.addKeyword("while");
     delta.addKeyword("if");
+
+    delta.drawGraph();
 }
