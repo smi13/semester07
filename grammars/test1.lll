@@ -1,0 +1,34 @@
+//Today you will learn how to swap 2 variables
+
+orig_a =3
+orig_b = 5
+
+a = orig_a b = orig_b
+
+//First way.
+
+a = a +b
+b= a-b
+a = a-b
+
+/*lets check the result*/
+
+if [a != orig_a || b !=ori_b]{}
+
+//2nd way.
+a = orig_a b = orig_b
+
+c = a
+a = b
+b = c
+
+
+1a = a
+
+/*make some calculations *tribute to Mr.Adams //
+UltimateAnswer42= (b - 1)*b*(a+b - 1)
+
+
+while[1] {
+
+a = a / b }
