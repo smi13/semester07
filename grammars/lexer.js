@@ -1,182 +1,42 @@
-var delta = [];
-
-var just_any = /[\s]|[\w]/,
-    comment = /#/,
-    spacing = /[\s]/,
-    digit = /[0-9]/,
-    id_bsymbol = /(?=\w)(?=[^0-9])/,
-    id_symbol = /[A-Za-z0-9_]/,
-    operator = /[\+\-\*\/\=]/,
-    begin_st = /\[/,
-    end_st = /\]/,
-    begin_block = /{/,
-    end_block = /}/,
-    not_comment = /(?=\s|\S)(?=[^#])/;
-
-delta["q0"] = [ [spacing, "q0"], 
-                [id_bsymbol, "id"],
-                [operator, "op"],
-                [digit, "const"],
-                [begin_st, "bst"],
-                [end_st, "est"],
-                [begin_block, "bb"],
-                [end_block, "eb"],
-                [comment, "comment"] ];
-
-delta["id"] = [ [id_symbol, "id"],
-                [utils.makenot(id_symbol), "id_found"] ];
-
-delta["const"] = [ [digit, "const"],
-                   [utils.makenot(digit), "const_found"] ];
-
-delta["op"] = [ [utils.makenot(operator), "op_found"] ];
-
-delta["bst"] = [ [just_any,  "bst_found"] ];
-delta["est"] = [ [just_any, "est_found"] ]
-delta["bb"] = [ [just_any, "bb_found"] ];
-delta["eb"] = [ [just_any, "eb_found"] ];
-
-delta["comment"] = [ [ not_comment, "comment"], [comment, "comment_found"] ];
-
-end_states = [];
-
-end_states["id_found"] = {tokid: "TOK_ID",
-    process: function (token) {
-        in_array = $.inArray(token, variables);
-
-        if (in_array != -1)
-            return new String("$" + in_array);
-        else
-        {
-            variables[variables.length] = token;
-            return new String("$" + (variables.length - 1));
-        }    
-    }};
-
-end_states["const_found"] = {tokid: "TOK_CONST",
-    process: function (token) {
-        in_array = $.inArray(token, constants);
-
-        if (in_array != -1)
-            return new String("$" + in_array);
-        else
-        {
-            constants[constants.length] = token;
-            return new String("$" + (constants.length - 1));
-        }
-    }};
-
-end_states["op_found"] = {tokid: "TOK_OP",
-    process: function (token) {
-        return token;
-    }};
-
-end_states["bst_found"] = {tokid: "TOK_BST",
-    process: function (token) {
-        return token;
-    }};
-end_states["est_found"] = {tokid: "TOK_EST",
-    process: function (token) {
-        return token;
-    }};
-end_states["bb_found"] = {tokid: "TOK_BB",
-    process: function (token) {
-        return token;
-    }};
-end_states["eb_found"] = {tokid: "TOK_EB",
-    process: function (token) {
-        return token;
-    }};
-
-end_states["comment_found"] = {tokid: "TOK_COMMENT",
-    process: function (token) {
-        return null;
-    }};
-
-var begin_state = "q0";
 
 lexer = function () {    
 }
 
-lexer.addKeyword = function (keyword) {
-
-    for (var i = 0; i < delta["q0"].length; i++)
-        if (delta["q0"][i][1] == "id") {
-            var reg_string = delta["q0"][i][0].source, res_string;
-            
-            res_string = reg_string + "(?=[^" + keyword[0] + "])";
-            delta["q0"][i][0] = new RegExp(res_string);
-        }
-
-    delta[begin_state].
-        push([ new RegExp(keyword[0]), keyword + "_" + keyword[0] ]);
-
-    for (i = 0; i < keyword.length - 1; i++) {
-        delta[keyword + "_" + keyword[i]] =
-            [ [ new RegExp(keyword[i + 1]), keyword + "_" + keyword[i + 1] ] ];
-        delta[keyword + "_" + keyword[i]].
-            push([ new RegExp("(?=\\w)(?=[^" + keyword[i + 1] + "])"), "id" ]);
-    }
-
-    delta[keyword + "_" + keyword[keyword.length - 1]] =
-        [ [ /\s|\[/, keyword + "_found" ] ];
-    delta[keyword + "_" + keyword[keyword.length - 1]].
-        push([ new RegExp("\\w"), "id" ]);
-
-    end_states[keyword + "_found"] =
-        {tokid: "TOK_" + String(keyword).toUpperCase(),
-          process: function(token) {
-              return token;
-          }};
-}
-
-lexer.switchState = function(state, sym) {
-    for (var i = 0; i < delta[state].length; i++)
-        if (delta[state][i][0].test(sym)) 
-            return delta[state][i][1];
-    
-    return -1;
-}
-
 lexer.analyze = function () {
 
+    lexResult.clear();
+
     var code = editAreaLoader.getValue("codeTextArea"), bi;
-    var cur_state = begin_state;
-    tokens = [];
-    variables = [];
-    constants = [];
+    var cur_state = delta.beginState;
     code = code + " ";
 
     for (i = 0; i < code.length;) {
-
         var old_state = cur_state;
-        cur_state = lexer.switchState(cur_state, code[i]);
+        cur_state = delta(code[i], cur_state);
 
         if (cur_state == -1)
             alert("OH SHI~");
         
-        if (old_state == begin_state && cur_state != begin_state)
+        if (old_state == delta.beginState && cur_state != delta.beginState)
             bi = i;
 
-        if (end_states[cur_state]) {
-
-            var token = code.substr(bi, i - bi),
-                res = end_states[cur_state].process(token);
-
-            if (res != null)
-                tokens[tokens.length] = [ end_states[cur_state].tokid, res ];
-            else
+        if (delta.isEndState(cur_state)) {
+            var token = code.substr(bi, i - bi);
+            
+            if (!lexResult.addToken(token, cur_state))
                 i++;
 
-            cur_state = begin_state;
+            cur_state = delta.beginState;
             continue;
         }
         i++;
     }
     
-    alert(tokens);
-    alert(variables);
-    alert(constants);
+    lexResult.display();
+    
+/*    alert(lexResult.tokens);
+    alert(lexResult.variables);
+    alert(lexResult.constants);*/
 }
 
 lexer.getKey = function (event) {
@@ -196,7 +56,7 @@ lexer.initialize = function () {
     codeForm.id = "codeForm";
 
     textArea = document.createElement("TEXTAREA");
-    textArea.setAttribute("rows", 30);
+    textArea.setAttribute("rows", 40);
     textArea.setAttribute("cols", 150);
     textArea.setAttribute("name", "codeForm");
     textArea.setAttribute("spellcheck", "false");
@@ -213,13 +73,57 @@ lexer.initialize = function () {
     document.getElementById("codeForm").appendChild(codeForm);
     document.getElementById("codeForm").appendChild(button);
 
-    editAreaLoader.init({
+
+     editAreaLoader.init({
                 id : "codeTextArea",		// textarea id
-                syntax: "cpp",			// syntax to be uses for highgliting
+                syntax: "lll",			// syntax to be uses for highgliting
                 allow_toggle: false,
-                start_highlight: true		// to display with highlight mode on start-up
+                font_size: 12,
+                replace_tab_by_spaces: true,
+                start_highlight: true,		// to display with highlight mode on start-up
+                toolbar: "*"
         });
+
+        editAreaLoader.setValue("codeTextArea",
+        "   #Today you will learn how to swap 2 variables#\n" +
+        "\n" +
+        "orig_a =3\n" +
+        "orig_b = 5\n" +
+        "\n" +
+        "a = orig_a b = orig_b\n" +
+        "\n" +
+        "#First way.#\n" +
+        "" +
+        "a = a +b\n" +
+        "b= a-b\n" +
+        "a = a-b\n" +
+        "\n" +
+        "#lets check the result#\n" +
+        "\n" +
+        "if [a = orig_a  b =ori_b]{}\n" +
+        "\n" +
+        "#2nd way#\n" +
+        "a = orig_a b = orig_b\n" +
+        "\n" +
+        "c = a\n" +
+        "a = b\n" +
+        "b = c\n" +
+        "\n" +
+        "\n" +
+        "1a = a\n" +
+        "\n" +
+        "#make some calculations *tribute to Mr.Adams #\n" +
+        "UltimateAnswer42= [b - 1]*b*[a+b - 1]\n" +
+        "\n" +
+        "\n" +
+        "while[1] {\n" +
+        "\n" +
+        "a = a / b }");
+
+
+    lexResult.initialize();
+    delta.initialize();
     
-    lexer.addKeyword("while");
-    lexer.addKeyword("if");
+    delta.addKeyword("while");
+    delta.addKeyword("if");
 }

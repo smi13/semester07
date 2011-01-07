@@ -3,6 +3,12 @@ textarea
     resize: none;
 }
 
+#resultForm
+{
+    padding-top: 20px;
+    text-align: center;
+}
+
 #codeForm
 {
 }

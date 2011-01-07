@@ -7,7 +7,7 @@ utils.map = function(arr, func) {
     }
 }
 
-utils.concat = function() {
+utils.concat = function () {
     var string = "";
 
     utils.map(arguments,
@@ -18,6 +18,6 @@ utils.concat = function() {
     return new RegExp(string.replace(/\]\[/g, ""));
 }
 
-utils.makenot = function(reg) {
+utils.makenot = function (reg) {
     return new RegExp(reg.source.replace("[", "[^"));
 }

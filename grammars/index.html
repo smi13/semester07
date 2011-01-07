@@ -2,26 +2,17 @@
 <html>
     <head>
         <title>Lexer</title>
+        <link rel="stylesheet" type="text/css" href="lexer.css" />
         <script language="javascript" type="text/javascript" src="utils.js"></script>
         <script language="javascript" type="text/javascript" src="jquery.js"></script>
         <script language="javascript" type="text/javascript" src="lexer.js"></script>
+        <script language="javascript" type="text/javascript" src="delta.js"></script>
+        <script language="javascript" type="text/javascript" src="lex_result.js"></script>
         <script language="javascript" type="text/javascript" src="edit_area/edit_area_full.js"></script>
+        <script language="javascript" type="text/javascript" src="lll_syntax.js"></script>
     </head>
     <body onload="lexer.initialize()">
         <div id="codeForm"></div>
-        <div id="resultForm" style ="text-align: center; padding-top: 20px">
-            <table border="1"">
-<tr>
-<td>Tokens</td>
-<td>Identifiers</td>
-<td>Constants</td>
-</tr>
-<tr>
-<td>row 2, cell 1</td>
-<td>row 2, cell 2</td>
-<td>row 2, cell 3</td>
-</tr>
-</table>
-        </div>
+        <div id="resultForm"></div>          
     </body>
 </html>

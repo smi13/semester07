@@ -5,8 +5,10 @@
 	
 	// call by the replace_tab function
 	EditArea.prototype.smartTab= function(){
-		val="                   ";
-		return EditArea.prototype.smartTab.arguments[2] + EditArea.prototype.smartTab.arguments[3] + val.substr(0, editArea.tab_nb_char - (EditArea.prototype.smartTab.arguments[3].length)%editArea.tab_nb_char);
+		val=" ";
+		return EditArea.prototype.smartTab.arguments[2] + 
+EditArea.prototype.smartTab.arguments[3] + 
+val.substr(0, editArea.tab_nb_char - (EditArea.prototype.smartTab.arguments[3].length)%editArea.tab_nb_char);
 	};
 	
 	EditArea.prototype.show_waiting_screen= function(){

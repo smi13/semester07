@@ -1,6 +1,5 @@
-0) Make code more readable: separate files, refactor
-1) Results output table
+
 2) Visualize current state machine
-3) Handle some errors. with line numbers
+3) Handle some errors. 
 4) Smarter operator support
 
